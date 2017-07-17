@@ -1,0 +1,64 @@
+{
+	"kinds":[
+		{
+			"title":"洗涤服务",
+			"from": "礼拜五商城",
+			"price":50,
+			"image":""
+		},
+		{
+			"title":"家庭维修",
+			"from": "礼拜五商城",
+			"price":60,
+			"image":""
+		},
+		{
+			"title":"搬家服务",
+			"from": "礼拜五商城",
+			"price":70,
+			"image":""
+		},
+		{
+			"title":"家政服务",
+			"from": "礼拜五商城",
+			"price":40,
+			"image":""
+		},
+		{
+			"title":"汽车服务",
+			"from": "礼拜五汽车服务中心",
+			"price":50,
+			"image":""
+		},
+		{
+			"title":"网购服务",
+			"from": "礼拜五商城",
+			"price":50,
+			"image":""
+		},
+		{
+			"title":"旅游服务",
+			"from": "礼拜五商城",
+			"price":65,
+			"image":""
+		},
+		{
+			"title":"拍照服务",
+			"from": "礼拜五商城",
+			"price":40,
+			"image":""
+		},
+		{
+			"title":"婚庆服务",
+			"from": "礼拜五商城",
+			"price":55,
+			"image":""
+		},
+		{
+			"title":"互联网服务",
+			"from": "礼拜五商城",
+			"price":70,
+			"image":""
+		}
+	]
+}

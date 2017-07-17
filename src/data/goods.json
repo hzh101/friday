@@ -1,0 +1,73 @@
+{
+	"friday":{
+		"title":"礼拜五",
+		"good":[
+			{
+				"name": "澳芒",
+				"price": 30,
+				"oldPrice": 40,
+				"activeDay": 4,
+				"images": ["1.png"]
+			}
+		]
+	},
+	"fruit":{
+		"title":"新鲜水果",
+		"item":[
+			{
+				"titleTwo":"水果礼盒",
+				"good":[
+					{
+						"name": "澳芒",
+						"price": 30,
+						"oldPrice": 40,
+						"activeDay": 4,
+						"images": ["1.png"]
+					}
+				]
+			},
+			{
+				"titleTwo":"进口水果",
+				"good":[
+					{
+						"name": "澳芒",
+						"price": 30,
+						"oldPrice": 40,
+						"activeDay": 4,
+						"images": ["1.png"]
+					},
+					{
+						"name": "澳芒23",
+						"price": 30,
+						"oldPrice": 40,
+						"activeDay": 4,
+						"images": ["1.png"]
+					}
+				]
+			}
+		]
+	},
+	"greens":{
+		"title":"田园蔬菜"
+	},
+	"meat":{
+		"title":"肉类家禽"
+	},
+	"fish":{
+		"title":"海鲜水产"
+	},
+	"goodFood":{
+		"title":"优选食材"
+	},
+	"wine":{
+		"title":"零食酒水"
+	},
+	"fastFood":{
+		"title":"蛋奶速食"
+	},
+	"global":{
+		"title":"全球代购"
+	}
+	
+
+}
