@@ -9,4 +9,8 @@
 </script>
 
 <style scoped>
+	h1{
+		font-size: 30px;
+		padding-left: 20px;
+	}
 </style>
