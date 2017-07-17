@@ -14,18 +14,41 @@ import footNavFive from 'components/footNavFive';
 import allGoods from 'components/allGoods';
 import moreGoods from 'components/moreGoods';
 
+import typeRoute from '../data/typeRoute.json';
+
+//用于模块测试
+import tlw1 from 'components/webpack+vue-tlw-test.vue';
+import tlw2 from 'components/webpack+vue-tlw-test2.vue';
+import lyc1 from 'components/webpack+vue-lyc-test.vue';
+import lyc2 from 'components/webpack+vue-lyc-test2.vue';
+
+
+
+var childRoute = [];
+for (var i = 0; i < typeRoute.route.length; i++) {
+	childRoute.push({path:typeRoute.route[i].path, component:moreGoods});
+	for (var j = 0; j<typeRoute.route[i].items.length; j++) {
+		childRoute.push({path:typeRoute.route[i].items[j].path, component:moreGoods});
+	}
+}
+
+//console.log(childRoute)
 
 Vue.use(Router)
 
 const router = new Router({
 	routes: [
+	    {path: '/tlw1',component: tlw1},
+	    {path: '/tlw2',component: tlw2},
+	    {path: '/lyc1',component: lyc1},
+	    {path: '/lyc2',component: lyc2},
+		
+		
 	    {path: '/',redirect: '/home'},
-		{path: '/home',component: home,},
+		{path: '/home',component: home},
 		{
 			path: '/home/all',component: allGoods,
-			children:[
-				{path:'a', component:moreGoods}
-			]
+			children:childRoute
 		},
 		
 		{path: '/footOne',component: footNavOne},
@@ -34,7 +57,7 @@ const router = new Router({
 		{path: '/footFour',component: footNavFour},
 		{path: '/footFive',component: footNavFive},
 		
-		{path: '/local/abc',component: local},
+		{path: '/local',component: local},
 		{path: '/friday',component: friday},
 		{path: '/integral',component: integral},
 	    

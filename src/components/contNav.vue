@@ -37,7 +37,7 @@ export default {
 			],
 			route:[
 				{path:'/home',title:'首页'},
-				{path:'/local/abc',title:'同城'},
+				{path:'/local',title:'同城'},
 				{path:'/friday',title:'礼拜五'},
 				{path:'/integral',title:'积分商城'}
 			]

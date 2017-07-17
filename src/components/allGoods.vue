@@ -32,8 +32,6 @@
 				</dl>
 			</div>
 		</div>
-		<router-link to='/home/all/a'>点我</router-link>
-		<!--<more-goods></more-goods>-->
 		<router-view></router-view>
 	</div>
 </template>

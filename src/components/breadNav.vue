@@ -10,6 +10,12 @@
 </template>
 
 <script>
+	import router from '../router';
+	
+//	router.afterEach((to, from, next) => {
+//	  console.log(from.path);
+//	});
+	
 	export default{
 		data() {
 			return {
@@ -28,27 +34,40 @@
 					
 					{path:'local',title:'同城'},
 					{path:'friday',title:'礼拜五'},
-					{path:'integral',title:'积分商城'}
+					{path:'integral',title:'积分商城'},
+					
+					{path:'fruit',title:'新鲜水果'}
 				]
 			}
 		},
-		methods:{},
-		created() {
+		methods:{
+			getNavArr(path) {
 			/*
 			 * arr: path以"/"分割的数组
 			 * pathStr :相对title对应的路由跳转的path
 			 */
-			var arr = this.$route.path.split("/");
-			var pathStr = "/";
-			for(var i=0; i<arr.length;i++) {
-				for (var j = 0; j < this.mapArr.length; j++) {
-					if (arr[i]==this.mapArr[j].path) {
-						pathStr += arr[i];
-						this.navTitle.push({path:pathStr,title:this.mapArr[j].title});
+				var arr = [];
+				var pathStr = [];
+				arr = path.split("/");
+				for(var i=0; i<arr.length;i++) {
+					for (var j = 0; j < this.mapArr.length; j++) {
+						if (arr[i]==this.mapArr[j].path) {
+							pathStr.push(arr[i]);
+							this.navTitle.push({path:pathStr.join("/"),title:this.mapArr[j].title});
+						}
 					}
 				}
 			}
-//			console.log(this.navTitle);
+		},
+		created() {
+			//使用该模块渲染时的钩子, 处理跳转过来的path
+			this.getNavArr(this.$route.path);
+			//使用路由钩子, 获取实时更新的path
+			router.afterEach((to, from, next) => {
+	  			console.log(to.path)	;
+	  			this.navTitle = [];
+				this.getNavArr(to.path);
+			});
 		}
 	}
 </script>
