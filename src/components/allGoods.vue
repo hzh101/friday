@@ -1,17 +1,25 @@
 <template>
 	<div>
-		<bread-nav></bread-nav>
+		<bread-nav :route='route'></bread-nav>
 		<div class="zh-kind">
 			<dl class="zh-firstType">
 				<dt>一级分类:</dt>
-				<dd @click="bol = !bol" :class="'activebg'">全部</dd>
-				<router-link :to='item.path' tag='dd' v-for="(item,index) in route" @click="showItem(index)" key='index'>
-					{{item.title}}
+				<router-link to='/home/all' tag='dd' class="router-link-active">
+					<span @click="bol = !bol">
+						全部
+					</span>
+				</router-link>
+				<router-link :to='item.path' tag='dd' v-for="(item,index) in route" key='index'>
+					<span @click="showItem(index)">
+						{{item.title}}
+					</span>
 				</router-link>
 			</dl>
 			<dl class="zh-secondType" v-show="bol">
-				<dt>二级分类:</dt>
-				<dd :class="'activebg'">全部</dd>
+				<dt id="dt">二级分类:</dt>
+				<router-link to='/home/all' tag='dd' class='router-link-active'>
+					全部
+				</router-link>
 				<router-link :to='value.path' v-for="(value,index) in itemArr" tag='dd' key='index'>
 					{{value.title}}
 				</router-link>
@@ -50,11 +58,17 @@
 				route:typeRoute.route
 			}
 		},
-		components:{ breadNav, moreGoods },
+		components:{
+			breadNav,
+			moreGoods 
+		},
 		methods:{
 			showItem(index) {
 				this.itemArr = this.route[index].items;
 			}
+		},
+		mounted(){
+//			$('#dt').addClass('router-link-active')
 		}
 	}
 </script>
@@ -95,7 +109,7 @@
 .zh-srot .zh-filter dd{
 	/*background-color: #4B943D;*/
 }
-.activebg,.zh-kind dd:hover{
+.router-link-active,.zh-kind dd:hover{
 	background-color: #4B943D;
 	color: #fff;
 	font-weight: 400;

@@ -24,10 +24,10 @@
 			"path":"/home/all/meat",
 			"title":"肉食家禽",
 			"items":[
-				{"path":"/home/all/meat/meat", "title":"羊肉"},
-				{"path":"/home/all/meat/meat", "title":"牛肉"},
-				{"path":"/home/all/meat/meat", "title":"鸡鸭肉"},
-				{"path":"/home/all/meat/meat", "title":"鱼肉"}
+				{"path":"/home/all/meat/meat1", "title":"羊肉"},
+				{"path":"/home/all/meat/meat2", "title":"牛肉"},
+				{"path":"/home/all/meat/meat3", "title":"鸡鸭肉"},
+				{"path":"/home/all/meat/meat4", "title":"鱼肉"}
 			]
 		},
 		{
