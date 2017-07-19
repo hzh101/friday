@@ -84,7 +84,12 @@
 				})
 				$(".swiper-button-next").on("mouseout", function() {
 					$(".icon-arrow-circle-o-right").css("color", "rgba(241,131,2,0.4)");
-				})
+				});
+				//新品和热卖
+				$(".tlw-hot-sale li").on("click", function() {
+					window.location.href = "404.html";
+				});
+				
 				//倒计时
 				function getRTime() {
 					var EndTime = new Date('2017/07/26 10:00:00');
@@ -100,11 +105,6 @@
 					$(".tlw-s").text(s);
 				}
 				setInterval(getRTime, 1000);
-	
-				//新品和热卖
-				$(".tlw-hot-sale li").on("click", function() {
-					window.location.href = "404.html";
-				})
 		    });
 	    }
 	}

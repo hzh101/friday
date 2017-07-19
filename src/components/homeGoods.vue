@@ -1,29 +1,52 @@
 <template>
 	<div id="tlw-homeGoods">
 		<!--商品详情-->
-			<!--礼拜五-->
-			<div class="tlw-product-details" v-for="item in kinds">
-				<div class="tlw-friday">
-					<img src="../images/5.png" />
-					<h2>{{item.kind}}</h2>
-					<b>friday</b>
-					<div class="tlw-over">
-						<p>距离结束</p>
-						<span class="tlw-day">00</span><span class="tlw-h">00</span><strong>:</strong><span class="tlw-m">00</span><strong>:</strong><span class="tlw-s">00</span>
-						<router-link to="/home/all">更多</router-link>
-					</div>
-
+		<!--礼拜五-->
+		<div class="tlw-product-details">
+			<div class="tlw-friday">
+				<img src="../images/5.png" />
+				<h2>礼拜五</h2>
+				<b>friday</b>
+				<div class="tlw-over">
+					<p>距离结束</p>
+					<span class="tlw-day">00</span><span class="tlw-h">00</span><strong>:</strong><span class="tlw-m">00</span><strong>:</strong><span class="tlw-s">00</span>
+					<router-link to='/friday'>更多</router-link>
 				</div>
-				<ul>
-					<li>
-						<router-link to='/detail'>
-							<img src="../images/6.jpg" />
-						</router-link>
-						<h3>澳芒</h3>
-						<p>礼拜五价：<strong>￥30</strong></p>
-					</li>
-				</ul>
+
 			</div>
+			<ul class="zh-friday">
+				<li v-for="item in friday">
+					<router-link :to="{path:'detail',query:{id:item.id}}">
+						<img :src='"static/imgs/"+item.images' />
+					</router-link>
+					<h3>{{item.name}}</h3>
+					<p>礼拜五价：<strong>￥{{item.price}}</strong></p>
+				</li>
+			</ul>
+		</div>
+		<div class="tlw-fruits" v-for="item in allType">
+			<div class="tlw-fresh-fruits">
+				<img src="../img/5.png" />
+				<h2>{{item.title}}</h2>
+				<!--<b>优选全球好货</b>-->
+				<div class="tlw-more">
+					<router-link to="/home/all">更多</router-link>
+				</div>
+			</div>
+			<ul>
+				<li v-for="val in item.count">
+					<router-link :to="{path:'detail',query:{id:val.id}}">
+						<img :src='"static/imgs/"+val.images' />
+					</router-link>
+					<router-link :to="{path:'detail',query:{id:val.id}}">
+						<h3>{{val.name}}</h3>
+					</router-link>
+					<p>￥{{val.price}}<strong>￥{{val.oldPrice}}</strong></p>
+					<!--购物车-->
+					<a href=""><img class="tlw-shoppingCar" src="../img/8.png" /></a>
+				</li>
+			</ul>
+		</div>
 	</div>
 </template>
 
@@ -31,25 +54,42 @@
 	export default{
 		data() {
 			return {
+				friday:[],
+				allType:[],
 				kinds:[
-				{kind:'新鲜水果',items:['水果礼盒','进口水果','有机水果','国产水果']},
-				{kind:'田园蔬菜',items:['蔬菜礼篮','有机蔬菜','地产蔬菜','进口蔬菜']},
-				{kind:'肉食家禽',items:['羊肉','牛肉','鸡鸭肉','鱼肉']},
-				{kind:'海鲜水产',items:['海鲜礼盒','国产海鲜','进口海鲜','干货其他']},
-				{kind:'优选食材',items:['优选米面','优选杂粮','粮油调味','其他食材']},
-				{kind:'零食酒水',items:['零食','特色干果','休闲冲饮','茶叶','白酒','啤酒','葡萄酒','其他酒品']},
-				{kind:'蛋奶速食',items:['方便速食','奶制品','面包甜点','蛋品']},
-				{kind:'全球代购',items:['保健品','洗护用品','农副产品','母婴用品']}
-			]
+					{kind:'新鲜水果',items:['水果礼盒','进口水果','有机水果','国产水果']},
+					{kind:'田园蔬菜',items:['蔬菜礼篮','有机蔬菜','地产蔬菜','进口蔬菜']},
+					{kind:'肉食家禽',items:['羊肉','牛肉','鸡鸭肉','鱼肉']},
+					{kind:'海鲜水产',items:['海鲜礼盒','国产海鲜','进口海鲜','干货其他']},
+					{kind:'优选食材',items:['优选米面','优选杂粮','粮油调味','其他食材']},
+					{kind:'零食酒水',items:['零食','特色干果','休闲冲饮','茶叶','白酒','啤酒','葡萄酒','其他酒品']},
+					{kind:'蛋奶速食',items:['方便速食','奶制品','面包甜点','蛋品']},
+					{kind:'全球代购',items:['保健品','洗护用品','农副产品','母婴用品']}
+				]
 			}
 		},
-		methods:{
-			
+		created(){
+			this.$http.get("http://localhost:8080/goods").then(function (res) {
+				this.friday = res.data.friday;
+				this.allType = res.data.type;
+				console.log(this.friday)
+				console.log(this.allType)
+			});
 		}
 	}
 </script>
 
-<style scoped>
+<style lang="less" scoped>
+.zh-friday{
+	height: 433px;
+	li{
+		float: left;
+		margin-right: 20px;
+	}
+	li:last-of-type{
+		margin-right: 0;
+	}
+}	
 	/*商品详情*/
 .tlw-product-details .tlw-friday,
 .tlw-fruits .tlw-fresh-fruits {
