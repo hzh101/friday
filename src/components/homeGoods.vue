@@ -16,7 +16,9 @@
 				</div>
 				<ul>
 					<li>
-						<a href="product.html"><img src="../images/6.jpg" /></a>
+						<router-link to='/detail'>
+							<img src="../images/6.jpg" />
+						</router-link>
 						<h3>澳芒</h3>
 						<p>礼拜五价：<strong>￥30</strong></p>
 					</li>
