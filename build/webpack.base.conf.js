@@ -25,6 +25,7 @@ module.exports = {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
       'images': path.resolve(__dirname, '../src/images'),
+        'imgs': path.resolve(__dirname, '../src/imgs'),
       'common': path.resolve(__dirname, '../src/common'),
       'components': path.resolve(__dirname, '../src/components'),
       'static': path.resolve(__dirname, '../static')
@@ -67,9 +68,9 @@ module.exports = {
         }
       },
       {
-				test: /\.less/,
-				loaders: ['style', 'css', 'autoprefixer', 'less'],
-			}
+          test: /\.less/,
+          loaders: ['style', 'css', 'autoprefixer', 'less'],
+      }
     ]
   },
   plugins: [

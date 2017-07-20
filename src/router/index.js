@@ -10,6 +10,7 @@ import footNavTwo from 'components/footNavTwo';
 import footNavThree from 'components/footNavThree';
 import footNavFour from 'components/footNavFour';
 import footNavFive from 'components/footNavFive';
+import goodsDetail from 'components/goodsDetail';
 
 import allGoods from 'components/allGoods';
 import moreGoods from 'components/moreGoods';
@@ -50,6 +51,8 @@ const router = new Router({
 			path: '/home/all',component: allGoods,
 			children:childRoute
 		},
+		
+		{path:'/detail', component: goodsDetail},
 		
 		{path: '/footOne',component: footNavOne},
 		{path: '/footTwo',component: footNavTwo},
