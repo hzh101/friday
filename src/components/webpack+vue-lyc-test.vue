@@ -17,7 +17,7 @@
 			this.$http.get('http://localhost:8080/getImg').then(function (res) {
 //                    console.log(res.data)
 				this.obj = res.data[0];
-				this.a = require('imgs/'+res.data[0].images)
+//				this.a = require('imgs/'+res.data[0].images)
 
 			})
 		}

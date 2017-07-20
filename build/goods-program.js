@@ -8,7 +8,7 @@ var router = devServer.router
 var mysql = require("mysql");
 
 var link = mysql.createConnection({
-    host:"localhost",
+    host:"10.90.85.224",
     user:"root",
     password:"",
     database:"friday"
