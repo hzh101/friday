@@ -10,11 +10,13 @@
 					<img src="../img/3.png" alt="" />&nbsp;&nbsp;<a href="javascript:;"><span>个人中心</span></a>
 				</router-link>
 			</div>
-			<div class="nav-second-shoppingcar-lyc">
-				<img src="../img/6.png" alt="" />&nbsp;&nbsp;<a href="javascript:;"><span>购物车</span></a>
-				<em>0</em>
-				<img src="../img/dhk.png" alt="" />
-			</div>
+			<router-link to='shoppingCart'>
+				<div class="nav-second-shoppingcar-lyc">
+					<img src="../img/6.png" alt="" />&nbsp;&nbsp;<a href="javascript:;"><span>购物车</span></a>
+					<em>0</em>
+					<img src="../img/dhk.png" alt="" />
+				</div>
+			</router-link>
 			<div class="nav-second-bottom-lyc">
 				<a href="javascript:void(0)">热门:</a>
 				<a href="">杂粮饭</a>

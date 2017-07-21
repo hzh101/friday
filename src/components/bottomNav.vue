@@ -16,11 +16,11 @@
 		data() {
 			return {
 				route:[
-					{path:'/footOne',title:'优先保证'},
+					{path:'/footOne',title:'优鲜保证'},
 					{path:'/footTwo',title:'全程监控'},
 					{path:'/footThree',title:'礼拜五特惠'},
 					{path:'/footFour',title:'基地直供'},
-					{path:'/footFive',title:'优先准时送达保证'}
+					{path:'/footFive',title:'准时送达'}
 				]
 			}
 		}

@@ -24,11 +24,14 @@ import myWallet from 'components/user/myWallet';
 import refillCar from 'components/user/refillCar';
 import personalData from 'components/user/personalData';
 import address from 'components/user/address';
-//import myFavorite from 'components/user/myFavorite';
-//import recently from 'components/user/recently';
-//import passwords from 'components/user/passwords';
-//import message from 'components/user/message';
-//import feedback from 'components/user/feedback';
+import myFavorite from 'components/user/myFavorite';
+import recently from 'components/user/recently';
+import passwords from 'components/user/passwords';
+import message from 'components/user/message';
+import feedback from 'components/user/feedback';
+
+//购物车
+import shoppingCart from 'components/shoppingCart/shoppingCart';
 
 
 import typeRoute from '../data/typeRoute.json';
@@ -92,14 +95,16 @@ const router = new Router({
 				//会员资料
 				{path: '/user/personalData',component:personalData},
 				{path: '/user/address',component:address},
-//				{path: '/user/myFavorite',component:myFavorite},
-//				{path: '/user/recently',component:recently},
-//				{path: '/user/passwords',component:passwords},
-//				//站内信
-//				{path: '/user/message',component:message},
-//				{path: '/user/feedback',component:feedback}
+				{path: '/user/myFavorite',component:myFavorite},
+				{path: '/user/recently',component:recently},
+				{path: '/user/passwords',component:passwords},
+				//站内信
+				{path: '/user/message',component:message},
+				{path: '/user/feedback',component:feedback}
 			]
 		},
+		//购物车
+		{path: '/shoppingCart',component: shoppingCart},
 	    
 	]
 });
