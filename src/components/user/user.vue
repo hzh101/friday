@@ -4,31 +4,22 @@
 			<h2>个人中心</h2>
 			<dl v-for="item in cont">
 				<dt>{{item.dt}}<span>></span></dt>
-				<dd v-for="abc in item.dd">{{abc}}</dd>
+				<router-link :to='abc.path' tag='dd' v-for="(abc,index) in item.dd" key='index'>{{abc.title}}</router-link>
 			</dl>
 		</div>
+		<router-view class='zh-box'></router-view>
 	</div>
 </template>
 
 <script>
+	import userRoute from '../../data/userRoute.json';
+	
 	export default {
 		data() {
 			return {
-				cont: [{
-						dt: "交易管理",
-						dd: ["我的账户", "我的订单", "我的积分", "积分订单", "我的钱包", "充值卡兑换"]
-					},
-					{
-						dt: "会员资料",
-						dd: ["个人资料", "地址管理", "我的收藏", "最近浏览", "修改密码"]
-					},
-					{
-						dt: "站内信",
-						dd: ["我的消息", "意见反馈"]
-					}]
+				cont: userRoute.userCenter
 			}
 		}
-		
 	}
 </script>
 <style scoped>
@@ -36,6 +27,7 @@
 		width: 1280px;
 		/*background: pink;*/
 		margin: 20px auto;
+		overflow: hidden;
 	}
 	
 	.tlw-person-center {
@@ -43,8 +35,12 @@
 		border: 1px solid #cccccc;
 		padding-left: 20px;
 		color: #666666;
+		float: left;
+		box-sizing: border-box;
 	}
-	
+	.zh-box{
+		float: left;
+	}
 	.tlw-person-center h2 {
 		font-size: 24px;
 		font-weight: 600;
