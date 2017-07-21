@@ -71,7 +71,7 @@
 						pag.push(middle++);
 					}
 				}
-				return pag
+				return pag;
 			}
 		}
 
