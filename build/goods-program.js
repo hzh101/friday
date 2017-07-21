@@ -100,7 +100,6 @@ router.get('/detail',function (req,res) {
 router.get('/more',function (req,res) {
 	var firstType = req.query.firstType;
 	var secondType = req.query.secondType;
-	console.log(firstType)
 	if (!secondType) {
 		if (firstType ==='全部') {
 			link.query(all,function (err, result) {
