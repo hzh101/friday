@@ -14,11 +14,12 @@ Vue.config.productionTip = false
 //  console.log(from.query);
 //});
 
+
 new Vue({
   el: '#app',
 	router,
   template: '<App/>',
   components: { App },
-  data:{age:5},
+	
   
 })

@@ -21,13 +21,13 @@
 				</div>
 				<div class="tlw-details-bottom">
 					<div class="tlw-left-top">
-						<img src="../images/20.png"/>
+						<img src="../../images/20.png"/>
 						<p>云南昭通丑苹果</p>
 						<span>6个装</span>
 						<em>￥35.0 x 1</em>
 					</div>
 					<div class="tlw-left-top">
-						<img src="../images/20.png"/>
+						<img src="../../images/20.png"/>
 						<p>云南昭通丑苹果</p>
 						<span>6个装</span>
 						<em>￥35.0 x 1</em>
@@ -58,7 +58,7 @@
 			</ul>
 			<a href="###">订单回收站</a>
 			<div class="tlw-order-none">
-				<img src="../images/19.png"/>
+				<img src="../../images/19.png"/>
 				<div class="tlw-none-right">
 					<p>您还没有订单哦！</p>
 					<button>去首页看看</button>
@@ -75,11 +75,9 @@
 </script>
 <style lang="less" scoped>
 .tlw-person-box {
-	/*width: 1280px;*/
-	/*margin: 20px auto;*/
 	.tlw-person-order{
+		/*display: none;*/
 		width: 1083px;
-		/*height: 616px;*/
 		border: 1px solid #CCCCCC;
 		color: #666666;
 		margin-left: 25px;
@@ -243,8 +241,6 @@
 	}
 }
 .tlw-person-box {
-	/*width: 1280px;
-	margin: 20px auto;*/
 	.tlw-person-order-null{
 		width: 1083px;
 		height: 616px;

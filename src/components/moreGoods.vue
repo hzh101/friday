@@ -2,7 +2,7 @@
 	<div>
 		<div class="tlw-more-things">
 			<ul class="tlw-more-products" v-show="showGoods[0].name?true:false">
-				<li v-for="item in showGoods" v-show="item.name?true:false">
+				<li v-for="(item,index) in showGoods" v-show="item.name?true:false" v-if="abc(index)">
 					<router-link to="{path:'detail',query:{id:item.id}}">
 						<img :src="'static/imgs/'+item.images" />
 							<h3>{{item.name}}</h3>
@@ -19,10 +19,10 @@
 </template>
 
 <script>
+
+	
 	export default{
-		props:["showGoods"],
-		mounted(){
-		}
+		props:["showGoods"]
 	}
 </script>
 

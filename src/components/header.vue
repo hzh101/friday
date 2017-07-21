@@ -6,7 +6,9 @@
 			<input type="text" placeholder="请输入关键字进行搜索"/>
 			<button>搜</button>
 			<div class="nav-second-user-lyc">
-				<img src="../img/3.png" alt="" />&nbsp;&nbsp;<a href="javascript:;"><span>个人中心</span></a>
+				<router-link to='/user/index'>
+					<img src="../img/3.png" alt="" />&nbsp;&nbsp;<a href="javascript:;"><span>个人中心</span></a>
+				</router-link>
 			</div>
 			<div class="nav-second-shoppingcar-lyc">
 				<img src="../img/6.png" alt="" />&nbsp;&nbsp;<a href="javascript:;"><span>购物车</span></a>

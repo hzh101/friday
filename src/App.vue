@@ -18,9 +18,7 @@
 	
 	import router from './router';
 	
-//	router.afterEach((to, from, next) => {
-//	  console.log(from.query);
-//	});
+
 	
 export default {
 	data(){

@@ -109,7 +109,6 @@ router.get('/more',function (req,res) {
 		        }
 		    });
 		} else{
-			console.log(111)
 			var firstSql = 'SELECT * FROM goods WHERE firstType="'+firstType+'"';
 			link.query(firstSql,function (err, result) {
 		        if (!err){
@@ -118,7 +117,6 @@ router.get('/more',function (req,res) {
 		    });
 		}
 	} else{
-		console.log(222)
 		var secondSql = 'SELECT * FROM goods WHERE firstType="' + firstType + '"AND  secondType="' + secondType + '"';
 		link.query(secondSql,function (err, result) {
 	        if (!err){
