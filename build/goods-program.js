@@ -1,6 +1,8 @@
 /**
  * Created by lanouhn on 17/7/19.
  */
+//var bodyParser = require('body-parser')
+//var urlencodeParser = bodyParser.urlencoded();
 var devServer = require('./dev-server')
 var app = devServer.app
 var router = devServer.router
@@ -8,7 +10,7 @@ var router = devServer.router
 var mysql = require("mysql");
 
 var link = mysql.createConnection({
-    host:"localhost",
+    host:"10.90.85.224",
     user:"root",
     password:"",
     database:"friday"
@@ -83,27 +85,60 @@ router.get('',function (req,res) {
     });
 });
 
-//首页点击 更多 的几口
-router.get('/more',function (req,res) {
-    link.query(all,function (err, result) {
-        if (!err){
-            res.send({all: result})
-        }
-    });
-});
-
-
 //详情页 展示
 router.get('/detail',function (req,res) {
     var id = req.query.id;
     var querysql = 'SELECT * FROM goods WHERE id='+id;
     link.query(querysql,function (err,result) {
         if(!err){
-            console.log(result);
+            res.send(result);
         }
     })
 });
 
+//首页点击 更多 的几口
+router.get('/more',function (req,res) {
+	var firstType = req.query.firstType;
+	var secondType = req.query.secondType;
+	console.log(firstType)
+	if (!secondType) {
+		if (firstType ==='全部') {
+			link.query(all,function (err, result) {
+		        if (!err){
+		        		res.send(result);
+		        }
+		    });
+		} else{
+			console.log(111)
+			var firstSql = 'SELECT * FROM goods WHERE firstType="'+firstType+'"';
+			link.query(firstSql,function (err, result) {
+		        if (!err){
+		        		res.send(result);
+		        }
+		    });
+		}
+	} else{
+		console.log(222)
+		var secondSql = 'SELECT * FROM goods WHERE firstType="' + firstType + '"AND  secondType="' + secondType + '"';
+		link.query(secondSql,function (err, result) {
+	        if (!err){
+	        		res.send(result);
+	        }
+	    });
+	}
+});
 
+
+
+
+
+app.all('*', function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
+    res.header("X-Powered-By",' 3.2.1');
+    res.header("Content-Type", "application/json;charset=utf-8");
+    next();
+});
 
 app.use('/goods',router);

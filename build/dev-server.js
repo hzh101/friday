@@ -11,7 +11,7 @@ var express = require('express')
 var webpack = require('webpack')
 var proxyMiddleware = require('http-proxy-middleware')
 var webpackConfig = require('./webpack.dev.conf')
-var mysql = require('mysql');
+
 
 // default port where dev server listens for incoming traffic
 var port = process.env.PORT || config.dev.port
@@ -30,7 +30,6 @@ var router = express.Router()
 exports.router = router
 
 require('./goods-program');
-
 
 /**************/
 

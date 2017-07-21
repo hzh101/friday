@@ -4,24 +4,24 @@
 		<div class="zh-kind">
 			<dl class="zh-firstType">
 				<dt>一级分类:</dt>
-				<router-link to='/home/all' tag='dd' class="router-link-active">
-					<span @click="bol = !bol">
-						全部
-					</span>
-				</router-link>
+				<dd class="zh-all1">
+					<span @click="allGet()">全部</span>
+				</dd>
 				<router-link :to='item.path' tag='dd' v-for="(item,index) in route" key='index'>
-					<span @click="showItem(index)">
+					<span @click="itemGet(index,$event)">
 						{{item.title}}
 					</span>
 				</router-link>
 			</dl>
 			<dl class="zh-secondType" v-show="bol">
 				<dt id="dt">二级分类:</dt>
-				<router-link to='/home/all' tag='dd' class='router-link-active'>
-					全部
-				</router-link>
+				<dd class="zh-all2">
+					<span @click="secAllGet()">全部</span>
+				</dd>
 				<router-link :to='value.path' v-for="(value,index) in itemArr" tag='dd' key='index'>
-					{{value.title}}
+					<span @click="secItemGet(index,$event)">
+						{{value.title}}
+					</span>
 				</router-link>
 			</dl>
 			<div class="zh-srot">
@@ -40,35 +40,79 @@
 				</dl>
 			</div>
 		</div>
-		<router-view></router-view>
+		<router-view :showGoods="showGoods"></router-view>
 	</div>
 </template>
 
 <script>
 	import typeRoute from '../data/typeRoute.json';
-	
 	import breadNav from './breadNav';
-	import moreGoods from './moreGoods';
 	
 	export default{
 		data() {
 			return {
-				bol:true,
+				bol:false,
 				itemArr:[],
-				route:typeRoute.route
+				route:typeRoute.route,
+				firstType:'',
+				secondType:'',
+				pushParams:{},
+				goodsArr:[],
+				showGoods:[]
+				
 			}
 		},
 		components:{
-			breadNav,
-			moreGoods 
+			breadNav 
 		},
 		methods:{
-			showItem(index) {
+			allGet(){
+				this.bol = false;
+				$('.zh-all1').addClass('zhactive');
+				$('.zh-firstType dd').removeClass('router-link-active');
+				this.pushParams = {firstType:"全部"};
+				this.getData(this.pushParams);
+			},
+			itemGet(index,$event) {
+				$('.zh-all1').removeClass('zhactive');
+				$('.zh-all2').addClass('zhactive');
+				$('.zh-firstType dd').removeClass('router-link-active');
+				if (!this.bol) this.bol = !this.bol;
 				this.itemArr = this.route[index].items;
+				this.firstType = this.route[index].title;
+				this.pushParams = {firstType:this.firstType};
+				//调用后台请求函数
+				this.getData(this.pushParams);
+			},
+			secAllGet(){
+				$('.zh-all2').addClass('zhactive');
+				$('.zh-secondType dd').removeClass('router-link-active');
+				this.pushParams = {firstType:this.firstType};
+				//调用后台请求函数
+				this.getData(this.pushParams);
+			},
+			secItemGet(index,$event){
+				$('.zh-all2').removeClass('zhactive');
+				$('.zh-secondType dd').removeClass('router-link-active');
+				this.secondType = this.itemArr[index].title;
+				this.pushParams = {firstType:this.firstType, secondType:this.secondType};
+				
+//				调用后台请求函数
+				this.getData(this.pushParams);
+			},
+			getData(params){
+				this.$http.get('/goods/more',{params:params}).then(function (res) {
+					this.showGoods = res.data;
+					console.log(this.showGoods)
+				});
 			}
 		},
-		mounted(){
-//			$('#dt').addClass('router-link-active')
+		created(){
+			var params = this.$route.query;
+			this.firstType = params.firstType;
+			
+			//调用后台请求函数
+			this.getData(params);
 		}
 	}
 </script>
@@ -109,7 +153,7 @@
 .zh-srot .zh-filter dd{
 	/*background-color: #4B943D;*/
 }
-.router-link-active,.zh-kind dd:hover{
+.zhactive,.router-link-active,.zh-kind dd:hover{
 	background-color: #4B943D;
 	color: #fff;
 	font-weight: 400;

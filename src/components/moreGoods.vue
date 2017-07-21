@@ -1,25 +1,36 @@
 <template>
 	<div>
 		<div class="tlw-more-things">
-			<ul class="tlw-more-products">
-				<li>
-					<router-link to='/detail'>
-						<img src="../images/13.jpg" />
-							<h3>团聚礼盒</h3>
+			<ul class="tlw-more-products" v-show="showGoods[0].name?true:false">
+				<li v-for="item in showGoods" v-show="item.name?true:false">
+					<router-link to="{path:'detail',query:{id:item.id}}">
+						<img :src="'static/imgs/'+item.images" />
+							<h3>{{item.name}}</h3>
 					</router-link>
-					<p>￥1<strong>￥2</strong></p>
+					<p>￥{{item.price}}<strong>￥{{item.oldPrice}}</strong></p>
 					<img class="tlw-shoppingCar" src="../images/8.png" />
 				</li>
 			</ul>
+			<div class="zh-nogoods" v-show="showGoods[0].name?false:true">
+				<img src="static/imgs/no-goods.png"/>
+			</div>
 		</div>
 	</div>
 </template>
 
 <script>
-	export default{}
+	export default{
+		props:["showGoods"],
+		mounted(){
+		}
+	}
 </script>
 
 <style scoped>
+	
+.zh-nogoods{
+	margin: 50px auto;
+}
 .tlw-more-things {
 	width: 1280px;
 	margin: 20px auto;

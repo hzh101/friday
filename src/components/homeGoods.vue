@@ -28,13 +28,13 @@
 			<div class="tlw-fresh-fruits">
 				<img src="../img/5.png" />
 				<h2>{{item.title}}</h2>
-				<!--<b>优选全球好货</b>-->
+				<!--<b>{{}}</b>-->
 				<div class="tlw-more">
-					<router-link to="/home/all">更多</router-link>
+					<router-link :to="{path:'home/all',query:{firstType:item.title}}">更多</router-link>
 				</div>
 			</div>
 			<ul>
-				<li v-for="val in item.count">
+				<li v-for="val in item.count" v-show="val.name?true:false">
 					<router-link :to="{path:'detail',query:{id:val.id}}">
 						<img :src='"static/imgs/"+val.images' />
 					</router-link>
@@ -72,8 +72,8 @@
 			this.$http.get("http://localhost:8080/goods").then(function (res) {
 				this.friday = res.data.friday;
 				this.allType = res.data.type;
-				console.log(this.friday)
-				console.log(this.allType)
+//				console.log(this.friday)
+//				console.log(this.allType)
 			});
 		}
 	}

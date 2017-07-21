@@ -2,10 +2,10 @@
 	<div>
 		<div class="tabbar">
 			<strong>您当前的位置:</strong>
-			<router-link to='/home'>
+			<!--<router-link to='/home'>
 				<span>首页</span>
 				<em>></em>
-			</router-link>
+			</router-link>-->
 			<router-link :to="item.path" v-for="(item, index) in navTitle" key='index'>
 				<span>{{item.title}}</span>
 				<em v-if="index==navTitle.length-1 ? false : true">></em>
@@ -16,7 +16,6 @@
 
 <script>
 	import router from '../router';
-	
 	
 	export default{
 		props:['route'],
@@ -56,7 +55,7 @@
 					for (var j = 0; j < this.mapArr.length; j++) {
 						if (arr[i]==this.mapArr[j].path) {
 							pathStr.push(arr[i]);
-							this.navTitle.push({path:pathStr.join("/"),title:this.mapArr[j].title});
+							this.navTitle.push({path:'/'+pathStr.join("/"),title:this.mapArr[j].title});
 						}
 					}
 				}

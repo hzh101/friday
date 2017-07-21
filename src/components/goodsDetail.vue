@@ -5,16 +5,15 @@
 			<div class="detail-first-lyc">
 				<div class="detail-first-left-lyc">
 					<div class="left-lyc">
-						<img src="../img/smallOrange.png" class="zero" />
+						<img :src='"static/imgs/"+data.images' class="zero" />
 						<div class="first-left-lyc"></div>
 					</div>
 					<div class="first-left-bottom-lyc">
-						<img src="../img/leftJT.png" class="first" />
-						<img src="../img/smallOrange.png" class="second  one" />
-						<img src="../img/integral/1.png" class="second" />
-						<img src="../img/smallOrange.png" class="second" />
-						<img src="../img/integral/1.png" class="second" />
-						<img src="../img/rightJT.png" class="first" />
+						<img src="../img/leftJT.png" class="first zh-frist" />
+						<div class="zh-box">
+							<img :src='"static/imgs/"+data.images' class="second  one" />
+						</div>
+						<img src="../img/rightJT.png" class="first zh-frist" />
 					</div>
 				</div>
 				<!--放大区域-->
@@ -22,7 +21,7 @@
 					<img src="" class="seven" />
 				</div>
 				<div class="detail-first-right-lyc">
-					<span>新疆哈密瓜1500kg</span>
+					<span>{{data.name}}</span>
 					<div class="first-right-seclect-lyc">
 						<a href="###" class="area">全国</a>
 						<a href="###" class="area">礼拜五</a>
@@ -37,7 +36,7 @@
 						<p>雀斑石榴持续热卖！云南蒙自石榴，原产波斯（今伊朗）一带，公元前二世纪时传入我国。是中国三大石榴之一，粒大皮薄，汁多味甜爽口。雀斑石榴持续热卖！云南蒙自石榴，原产波斯（今伊朗）一带，公元前二世纪时传入我国。是中国三大石榴之一，粒大皮薄，汁多味甜爽口。</p>
 					</div>
 					<div class="first-right-price-lyc">
-						<h3><span>现价&nbsp;&nbsp;:&nbsp;&nbsp;¥&nbsp;20.0</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>原价&nbsp;&nbsp;:&nbsp;&nbsp;¥40.0</span></h3>
+						<h3><span>现价&nbsp;&nbsp;:&nbsp;&nbsp;¥&nbsp;{{data.price}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>原价&nbsp;&nbsp;:&nbsp;&nbsp;¥{{data.oldPrice}}</span></h3>
 						<h4>
 							<span  class="price">请选择规格</span>
 							<a href="###">500g</a>
@@ -74,7 +73,7 @@
 			</div>
 			<div class="detail-product-lyc" >
 				<div class="detail-product-nav-lyc">
-					<a @click="change">商品详情</a><a @click="change">商品评价</a>
+					<a @click="change" class="change">商品详情</a><a @click="change">商品评价</a>
 				</div>
 				<!--商品详情-->
 				<div v-show="bool">
@@ -151,7 +150,8 @@
 	export default {
 		data(){
 			return {
-				bool:true
+				bool:true,
+				data:{}
 			}
 		},
 		methods:{
@@ -165,8 +165,13 @@
 		components: {
 			breadNav
 		},
+		created(){
+			var id = this.$route.query.id;
+			this.$http.get('http://localhost:8080/goods/detail?id='+id).then(function (res) {
+				this.data = res.data[0];
+			});
+		},
 		mounted() {
-			
 			var index = 0;
 			//点击图片放大显示
 			$(".second").each(function(i, e) {
@@ -282,6 +287,13 @@
 </script>
 
 <style scoped>
+	
+	.zh-box{
+		display: inline-block;
+		width: 440px;
+		padding-left: 10px;
+		box-sizing: border-box;
+	}
 	button{outline: none;border: none;}
 	.detail-lyc {
 		width: 1280px;
@@ -304,23 +316,22 @@
 	.first-left-bottom-lyc {
 		margin-top: 38px;
 	}
-	
-	.first-left-bottom-lyc img:first-child,
-	.first-left-bottom-lyc img:last-child {
-		padding-bottom: 20px;
+	.first-left-bottom-lyc>.zh-frist{
 		width: 20px;
 		height: 40px;
 		cursor: pointer;
+		padding-bottom: 20px;
 	}
 	
-	.first-left-bottom-lyc .second {
+	.first-left-bottom-lyc img.second {
+		float: left;
 		width: 75px;
 		height: 75px;
-		margin: 0 13px;
+		margin-right: 25px;
 		border: 3px solid transparent;
 	}
 	
-	.first-left-bottom-lyc .one {
+	.first-left-bottom-lyc img.one {
 		border: 3px solid #f08200;
 	}
 	
