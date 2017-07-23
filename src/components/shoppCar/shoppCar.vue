@@ -21,11 +21,35 @@
 				<td>
 					<span>-</span><input type="text" value="2"/><span>+</span>
 				</td>
-				<td>4</td>
-				<td>4</td>
-				<td>4</td>
+				<td>¥1</td>
+				<td>¥2</td>
+				<td><button class="delete">删除</button></td>
+			</tr>
+			<tr>
+				<td><input type="checkbox"/></td>
+				<td>
+					<img src="static/imgs/fish-a1.png"/>
+					<strong>青柠檬</strong>
+				</td>
+				<td>无</td>
+				<td>
+					<span>-</span><input type="text" value="2"/><span>+</span>
+				</td>
+				<td>¥1</td>
+				<td>¥2</td>
+				<td><button class="delete">删除</button></td>
+			</tr>
+			<tr class="foot">
+				<td colspan="7">
+					<span>0</span>
+					<span>¥</span>
+					<strong>商品金额</strong>
+				</td>
 			</tr>
 		</table>
+		<div class="">
+			
+		</div>
 	</div>
 </template>
 
@@ -124,6 +148,33 @@
 				}
 				th:nth-of-type(7),td:nth-of-type(7){
 					width: 64px;
+					.delete{
+						border: none;
+						background-color: #fff;
+						font-size: 14px;
+					}
+				}
+			}
+			.foot{
+				height:69px;
+				td{
+					font-size: 18px;
+					strong{
+						color: #666;
+						float: right;
+					}
+					span{
+						color: red;
+						float: right;
+					}
+					span:nth-of-type(2){
+						margin-left: 20px;
+						margin-right: 20px;
+					}
+					span:nth-of-type(1){
+						margin-right: 50px;
+						font-size: 20px;
+					}
 				}
 			}
 		}
