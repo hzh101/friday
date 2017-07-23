@@ -9,11 +9,22 @@
 					<span></span>
 				</div>
 				<ul class="first-content-right-lyc">
-					<router-link to="/" tag='li' >你好,&nbsp;&nbsp;<span>15093153625</span>&nbsp;&nbsp;|</router-link>
-					<router-link to="/tlw1" tag='li'>退出&nbsp;&nbsp;|</router-link>
-					<router-link to="/user/myOrder" tag='li'>我的订单&nbsp;&nbsp;|</router-link>
-					<router-link to="/user/message" tag='li'>我的消息&nbsp;&nbsp;|</router-link>
-					<router-link to="/lyc2" tag='li'>我是商家&nbsp;&nbsp;|</router-link>
+					<router-link to="/login" tag='li' >
+						<span id="zh-login">登录</span>
+						<strong id="zh-phone"></strong>
+					|</router-link>
+					<li>
+						<span id="zh-reg">注册</span>
+					|</li>
+					<router-link to="/user/myOrder" tag='li'>
+						<span>我的订单</span>
+						|</router-link>
+					<router-link to="/user/message" tag='li'>
+						<span>我的消息</span>
+						|</router-link>
+					<router-link to="/login" tag='li'>
+						<span>我是商家</span>
+						|</router-link>
 					<li><img src="../img/5.png"/>&nbsp;&nbsp;090---22511</li>
 				</ul>
 			</div>
@@ -23,7 +34,11 @@
 
 <script>
 	export default{
-	    created(){}
+	    data(){
+	    		return{
+	    			
+	    		}
+	    }
 	}
 </script>
 
@@ -57,7 +72,8 @@
 	font-size: 14px;
 	margin-left: 10px;
 }
-.first-content-right-lyc li span{color: #50943d;}
+.first-content-right-lyc li span{margin: 0 5px;}
+.first-content-right-lyc li strong{color: #50943d;}
 .first-content-right-lyc li img{
 	vertical-align: middle;
 }

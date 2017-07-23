@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
+import index from 'components/index';
+import login from 'components/login';
 import home from 'components/home';
 import local from 'components/local';
 import friday from 'components/friday';
@@ -62,9 +64,10 @@ const router = new Router({
 	    {path: '/tlw2',component: tlw2},
 	    {path: '/lyc1',component: lyc1},
 	    {path: '/lyc2',component: lyc2},
+//	    {path: '/',component: lyc2},
 		
-		
-	    {path: '/',redirect: '/home'},
+		{path: '/',redirect: '/login'},
+		{path: '/login',component: login},
 		{path: '/home',component: home},
 		{
 			path: '/home/all',component: allGoods,

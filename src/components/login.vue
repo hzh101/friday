@@ -1,12 +1,9 @@
 <template>
 	<div>
-		<h1>tlw-测试模板</h1>
-		<button class="btn1">登录</button>
-		<button class="btn2">注册</button>
 		<div class="tlw-register">
 			<div class="tlw-register-box">
 				<div class="tlw-box tlw-box-login">
-					<div class="tlw-box-top">
+					<div class="tlw-box-top" >
 						<h4>登录</h4>
 						<span>手机验证码登录</span>
 						<img src="../images/tu2.png" alt="" />
@@ -19,8 +16,8 @@
 						<img src="../images/15.png" />
 						<input class="input3" type="text" placeholder="验证码" />
 						<strong class="code"><em>!</em>请输入验证码</strong>
-						<img src="../images/16.png" />
-						<span>看不清，换一张</span>
+						<img :src='"../../static/imgs/testImage/"+img+".png"' />
+						<span @click="change()">看不清，换一张</span>
 					</div>
 					<div class="tlw-box-auto">
 						<span><input type="checkbox" />自动登录</span>
@@ -38,20 +35,20 @@
 					</div>
 					<div class="tlw-box-inpts">
 						<input class="input1" type="text" placeholder="请输入手机号" />
-						<strong class="phone"><em>!</em>请输入手机号</strong>
+						<strong class="phone zh-warn"><em>!</em>请输入手机号</strong>
 						<input class="input2" type="password" placeholder="请输入密码" />
-						<strong class="password"><em>!</em>请输入密码</strong>
+						<strong class="password zh-warn"><em>!</em>请输入密码</strong>
 						<img src="../images/15.png" />
 						<input class="input3" type="text" placeholder="验证码" />
-						<img src="../images/16.png" />
-						<span>看不清，换一张</span>
-						<strong class="code"><em>!</em>请输入验证码</strong>
+						<img :src='"../../static/imgs/testImage/"+img+".png"' />
+						<span @click="change()">看不清，换一张</span>
+						<strong class="code zh-warn"><em>!</em>请输入验证码</strong>
 						<input class="input4" type="text" placeholder="请输入手机验证码" />
 						<button>手机验证码</button>
-						<strong class="message"><em>!</em>请输入短信验证码</strong>
+						<strong class="message zh-warn"><em>!</em>请输入短信验证码</strong>
 					</div>
 					<div class="tlw-box-read">
-						<strong><em></em></strong>
+						<strong @click="bool=!bool"><em v-show="bool"></em></strong>
 						<span>我已阅读并同意《礼拜五用户使用协议》</span>
 					</div>
 					<div class="tlw-box-btn">
@@ -67,39 +64,56 @@
 
 <script>
 	export default{
+		data() {
+			return {
+				bool:true,
+				img:'yan5',
+				imgArr:['yan1','yan2','yan3','yan4','yan5','yan6','yan7','yan8','yan9'],
+				testArr:['EKPK','FWLS','EFLS','MKLO','KWUN','EYCZ','EWRZ','LFNF','KLMR']
+			}
+		},
+		methods:{
+			change(){
+				var index = this.ranNum(0,8);
+				this.img = this.imgArr[index];
+			},
+			ranNum(min,max){
+				return Math.floor(Math.random()*(max-min+1)+min);
+			}
+		},
 		mounted() {
-			//点击登录按钮，登录页面出现
-			$(".btn1").on("click", function() {
-				$(".tlw-register").css("opacity", "1")
-				$(".tlw-box-login").css("opacity", "1");
-				one();
-				$(".login-btn").on("click", function() {
-					var phoneNum = /^1[3578]\d{9}$/;
-					if(!phoneNum.test($('.input1').val())) {
-						$(".phone").css("opacity", "1");
-						$(".input1").focus();
-						return false
-					}
-					if($(".input2").val().length == 0 && $(".input3").val().length == 0) {
-						$(".password").css("opacity", "1");
-						$(".code").css("opacity", "1");
-					}
-				})
+			var _this = this;
+			$('#zh-login').click(function () {
+  				$('.tlw-box-zhuce').css('display','none');
+  				$('.zh-warn').css('opacity',0);
+	  		});
+	  		$('#zh-reg').click(function () {
+	  			$('.tlw-box-zhuce').css('display','block');
+	  			$('.zh-warn').css('opacity',0);
+	  		});
+			one();
+			$(".login-btn").on("click", function() {
+				var phoneNum = /^1[3578]\d{9}$/;
+				if(!phoneNum.test($('.input1').val())) {
+					$(".phone").css("opacity", "1");
+					$(".input1").focus();
+					return false
+				}
+				if($(".input2").val().length == 0 && $(".input3").val().length == 0) {
+					$(".password").css("opacity", "1");
+					$(".code").css("opacity", "1");
+				}
 			})
-
-			$(".btn2").on("click", function() {
-				$(".tlw-register").css("opacity", "1")
-				$(".tlw-box-zhuce").css("display", "block");
-				one();
-			})
-
 			function one() {
 				//当input聚焦时，此输入框的边框和内阴影出现
 				$(".tlw-box-inpts>input").on("focus", function() {
 					$(this).css("border", "1px solid #74afec")
 					$(this).css("box-shadow", "inset 0 0 5px #74afec")
 				})
-				//当第一个输入框失交时，输入框的边框和内阴影出现，如果输入值为空，则显示警告语⚠️
+				//当第一个输入框失交时，输入框的边框和内阴影出现，如果输入值为空，则显示警告语️
+				$(".input1").focus(function(){
+					$(".phone").css("opacity", "0");
+				});
 				$(".input1").on("blur", function() {
 					$(this).css("border", "1px solid #cccccc")
 					$(this).css("box-shadow", "none")
@@ -111,6 +125,9 @@
 					}
 				})
 				//当第二个输入框失交时，输入框的边框和内阴影出现，如果输入值为空，则显示警告语
+				$(".input2").focus(function(){
+					$(".password").css("opacity", "0");
+				});
 				$(".input2").on("blur", function() {
 					$(this).css("border", "1px solid #cccccc")
 					$(this).css("box-shadow", "none")
@@ -121,11 +138,15 @@
 						$(".password").css("opacity", "0");
 					}
 				})
+				$(".input3").focus(function(){
+					$(".code").css("opacity", 0);
+				});
 				$(".input3").on("blur", function() {
-					$(this).css("border", "1px solid #cccccc")
-					$(this).css("box-shadow", "none")
-					if($(this).val().length > 0) {
-						$(".code").css("opacity", "0");
+					$(this).css("border", "1px solid #cccccc");
+					$(this).css("box-shadow", "none");
+					var str = $(this).val().toUpperCase();
+					if( _this.testArr.indexOf(str)<0) {
+						$(".code").css("opacity", "1");
 					}
 				})
 				$(".input4").on("blur", function() {
@@ -134,14 +155,6 @@
 					if($(this).val().length == 0) {
 						$(".message").css("opacity", "1");
 					}
-				})
-				$(".register-btn1").on("click", function() {
-					$(".tlw-box-zhuce").css("display", "block");
-					$(".tlw-box-zhuce>.tlw-box-inpts>strong").css("opacity","0");
-				})
-				$(".login-btn2").on("click", function() {
-					$(".tlw-box-zhuce").css("display", "none");
-					$(".tlw-box-login>.tlw-box-inpts>strong").css("opacity","0");
 				})
 			}
 		}
@@ -161,7 +174,6 @@
 		background: url(../images/图1.jpg) no-repeat;
 		background-size: 100% 100%;
 		position: relative;
-		opacity: 0;
 	}
 	
 	.tlw-register .tlw-register-box {
@@ -246,12 +258,14 @@
 	
 	.tlw-register .tlw-register-box .tlw-box .tlw-box-inpts img:nth-of-type(1) {
 		position: absolute;
-		right: 0;
+		right: 1px;
 		top: 85px;
 	}
 	
 	.tlw-register .tlw-register-box .tlw-box .tlw-box-inpts img:nth-of-type(2) {
 		position: absolute;
+		width: 77px;
+		height: 30px;
 		left: 140px;
 		top: 147px;
 	}
@@ -259,6 +273,7 @@
 	.tlw-register .tlw-register-box .tlw-box .tlw-box-inpts span {
 		color: #ff6600;
 		font-size: 13px;
+		line-height: 30px;
 		position: absolute;
 		right: 5px;
 		top: 155px;
@@ -335,7 +350,6 @@
 		cursor: pointer;
 		color: white;
 	}
-	
 	.tlw-register .tlw-register-box .tlw-box-zhuce .tlw-box-read strong {
 		display: inline-block;
 		width: 11px;
