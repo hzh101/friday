@@ -10,7 +10,7 @@
 					<img src="../img/3.png" alt="" />&nbsp;&nbsp;<a href="javascript:;"><span>个人中心</span></a>
 				</router-link>
 			</div>
-			<router-link to='shoppingCart'>
+			<router-link to='/shoppCar'>
 				<div class="nav-second-shoppingcar-lyc">
 					<img src="../img/6.png" alt="" />&nbsp;&nbsp;<a href="javascript:;"><span>购物车</span></a>
 					<em>0</em>
