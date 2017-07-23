@@ -31,7 +31,7 @@ import message from 'components/user/message';
 import feedback from 'components/user/feedback';
 
 //购物车
-import shoppingCart from 'components/shoppingCart/shoppingCart';
+import shoppCar from 'components/shoppCar/shoppCar';
 
 
 import typeRoute from '../data/typeRoute.json';
@@ -104,7 +104,7 @@ const router = new Router({
 			]
 		},
 		//购物车
-		{path: '/shoppingCart',component: shoppingCart},
+		{path: '/shoppCar',component: shoppCar},
 	    
 	]
 });
