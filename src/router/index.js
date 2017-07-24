@@ -38,13 +38,6 @@ import shoppCar from 'components/shoppCar/shoppCar';
 
 import typeRoute from '../data/typeRoute.json';
 
-//用于模块测试
-import tlw1 from 'components/webpack+vue-tlw-test.vue';
-import tlw2 from 'components/webpack+vue-tlw-test2.vue';
-import lyc1 from 'components/webpack+vue-lyc-test.vue';
-import lyc2 from 'components/webpack+vue-lyc-test2.vue';
-
-
 
 var childRoute = [];
 for (var i = 0; i < typeRoute.route.length; i++) {
@@ -61,55 +54,51 @@ Vue.use(Router)
 const router = new Router({
 	mode:'history',
 	routes: [
-	    {path: '/tlw1',component: tlw1},
-	    {path: '/tlw2',component: tlw2},
-	    {path: '/lyc1',component: lyc1},
-	    {path: '/lyc2',component: lyc2},
-//	    {path: '/',component: lyc2},
-		
 		{path: '/',redirect: '/login'},
 		{path: '/login',component: login},
-		{path: '/home',component: home},
 		{
-			path: '/home/all',component: allGoods,
-			children:childRoute
-		},
-		
-		{path:'/detail', component: goodsDetail},
-		
-		{path: '/footOne',component: footNavOne},
-		{path: '/footTwo',component: footNavTwo},
-		{path: '/footThree',component: footNavThree},
-		{path: '/footFour',component: footNavFour},
-		{path: '/footFive',component: footNavFive},
-		
-		{path: '/local',component: local},
-		{path: '/friday',component: friday},
-		{path: '/integral',component: integral},
-		{
-			path: '/user',component: user,
+			path: '/index',component: index,
 			children:[
-				//交易管理
-				{path: '/user/index',component:myAccount},
-				{path: '/user/myOrder',component:myOrder},
-				{path: '/user/myIntegral',component:myIntegral},
-				{path: '/user/orderScore',component:orderScore},
-				{path: '/user/myWallet',component:myWallet},
-				{path: '/user/refillCar',component:refillCar},
-				//会员资料
-				{path: '/user/personalData',component:personalData},
-				{path: '/user/address',component:address},
-				{path: '/user/myFavorite',component:myFavorite},
-				{path: '/user/recently',component:recently},
-				{path: '/user/passwords',component:passwords},
-				//站内信
-				{path: '/user/message',component:message},
-				{path: '/user/feedback',component:feedback}
+				{path: '/home',component: home},
+				{
+					path: '/home/all',component: allGoods,
+					children:childRoute
+				},
+				{path:'/detail', component: goodsDetail},
+				{path: '/local',component: local},
+				{path: '/friday',component: friday},
+				{path: '/integral',component: integral},
+				{
+					path: '/user',component: user,
+					children:[
+						//交易管理
+						{path: '/user/index',component:myAccount},
+						{path: '/user/myOrder',component:myOrder},
+						{path: '/user/myIntegral',component:myIntegral},
+						{path: '/user/orderScore',component:orderScore},
+						{path: '/user/myWallet',component:myWallet},
+						{path: '/user/refillCar',component:refillCar},
+						//会员资料
+						{path: '/user/personalData',component:personalData},
+						{path: '/user/address',component:address},
+						{path: '/user/myFavorite',component:myFavorite},
+						{path: '/user/recently',component:recently},
+						{path: '/user/passwords',component:passwords},
+						//站内信
+						{path: '/user/message',component:message},
+						{path: '/user/feedback',component:feedback}
+					]
+				},
+				//购物车
+				{path: '/shoppCar',component: shoppCar},
+				
+				{path: '/footOne',component: footNavOne},
+				{path: '/footTwo',component: footNavTwo},
+				{path: '/footThree',component: footNavThree},
+				{path: '/footFour',component: footNavFour},
+				{path: '/footFive',component: footNavFive},
 			]
-		},
-		//购物车
-		{path: '/shoppCar',component: shoppCar},
-	    
+		},    
 	]
 });
 

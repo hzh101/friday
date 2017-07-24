@@ -2,6 +2,7 @@
 	<div>
 		<div class="tlw-register">
 			<div class="tlw-register-box">
+				<bullet :tanMsg='tanMsg'></bullet>
 				<div class="tlw-box tlw-box-login">
 					<div class="tlw-box-top" >
 						<h4>登录</h4>
@@ -62,14 +63,21 @@
 </template>
 
 <script>
+	import bullet from 'components/user/bullet';
+	import router from '../router';
+	
 	export default{
 		data() {
 			return {
+				tanMsg:'用户名或密码不正确!',
 				bool:true,
 				img:'yan5',
 				imgArr:['yan1','yan2','yan3','yan4','yan5','yan6','yan7','yan8','yan9'],
 				testArr:['EKPK','FWLS','EFLS','MKLO','KWUN','EYCZ','EWRZ','LFNF','KLMR']
 			}
+		},
+		components:{
+			bullet
 		},
 		methods:{
 			change(){
@@ -85,8 +93,13 @@
 				if ($('.input1').val() && $('.input2').val()) {
 					var phone = $('.input1').val();
 					var pwd = $('.input2').val();
-					this.$http.get('/api/user/login',{params:{phone:phone,passWord:pwd}}).then(function(res){
-						
+					this.$http.post('/api/user/login',{phone:phone,passWord:pwd},{emulateJSON:true}).then(function(res){
+						var data = res.data;
+						if (data==1) {
+							router.push('/home');
+						} else{
+							$(".bullet").fadeIn(500).delay(500).fadeOut();
+						}
 					});
 				}
 			},
@@ -177,6 +190,12 @@
 </script>
 
 <style scoped>
+	.bullet{
+		position: absolute;
+		top: 200px;
+		left: -220px;
+		display: none;
+	}
 	h1{
 		font-size: 30px;
 		padding-left: 20px;
@@ -199,7 +218,7 @@
 		position: absolute;
 		top: 0;
 		right: 200px;
-		overflow: hidden;
+		/*overflow: hidden;*/
 	}
 	
 	.tlw-register .tlw-register-box .tlw-box {
