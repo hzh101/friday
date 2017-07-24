@@ -38,12 +38,6 @@ import shoppCar from 'components/shoppCar/shoppCar';
 
 import typeRoute from '../data/typeRoute.json';
 
-//用于模块测试
-import tlw1 from 'components/webpack+vue-tlw-test.vue';
-import tlw2 from 'components/webpack+vue-tlw-test2.vue';
-import lyc1 from 'components/webpack+vue-lyc-test.vue';
-import lyc2 from 'components/webpack+vue-lyc-test2.vue';
-
 
 
 var childRoute = [];
@@ -61,11 +55,6 @@ Vue.use(Router)
 const router = new Router({
 	mode:'history',
 	routes: [
-	    {path: '/tlw1',component: tlw1},
-	    {path: '/tlw2',component: tlw2},
-	    {path: '/lyc1',component: lyc1},
-	    {path: '/lyc2',component: lyc2},
-//	    {path: '/',component: lyc2},
 		
 		{path: '/',redirect: '/login'},
 		{path: '/login',component: login},
