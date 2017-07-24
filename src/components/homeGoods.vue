@@ -69,11 +69,11 @@
 			}
 		},
 		created(){
-			this.$http.get("http://localhost:8080/goods").then(function (res) {
+			this.$http.get("/api/goods").then(function (res) {
 				this.friday = res.data.friday;
 				this.allType = res.data.type;
-//				console.log(this.friday)
-//				console.log(this.allType)
+				console.log(this.friday)
+				console.log(this.allType)
 			});
 		}
 	}

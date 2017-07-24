@@ -5,7 +5,7 @@
 			<div class="nav-first-content-lyc">
 				<div class="first-content-left-lyc">
 					<span>所在城市:</span>
-					<span>&nbsp;哈密市伊州市</span>&nbsp;&nbsp;
+					<span id="city">&nbsp;哈密市伊州市</span>&nbsp;&nbsp;
 					<span></span>
 				</div>
 				<ul class="first-content-right-lyc">
@@ -28,28 +28,37 @@
 					<li><img src="../img/5.png"/>&nbsp;&nbsp;090---22511</li>
 				</ul>
 			</div>
+			<current-city id="cover"></current-city>
 		</div>
 	</div>
 </template>
 
 <script>
+	import currentCity from 'components/currentCity';
 	export default{
+		components:{ currentCity },
 	    data(){
 	    		return{
 	    			
 	    		}
+	    },
+	    mounted(){
+	    		$('#city').click(function () {
+	    			$('#cover').toggle()
+	    		})
 	    }
 	}
 </script>
 
 <style scoped>
+#cover{display: none;}
 .nav-first-lyc {
 	height:36px;
 	background:#eee;
 	}
 .nav-first-content-lyc {
 	width: 1280px;
-	overflow: hidden;
+	/*overflow: hidden;*/
 	margin: 0 auto;
 	line-height: 36px;
 }

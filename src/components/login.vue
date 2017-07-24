@@ -24,8 +24,8 @@
 						<p>忘记密码？</p>
 					</div>
 					<div class="tlw-box-btn">
-						<button class="login-btn1">登录</button>
-						<button class="register-btn1">会员注册</button>
+						<button @click="login" class="login-btn1">登录</button>
+						<button @click="register" class="register-btn1">会员注册</button>
 						<p>提示：未注册的用户将直接注册为礼拜五用户</p>
 					</div>
 				</div>
@@ -52,13 +52,12 @@
 						<span>我已阅读并同意《礼拜五用户使用协议》</span>
 					</div>
 					<div class="tlw-box-btn">
-						<button class="register-btn2">注册</button>
-						<button class="login-btn2">登录</button>
+						<button @click="register" class="register-btn2">注册</button>
+						<button @click="login" class="login-btn2">登录</button>
 					</div>
 				</div>
 			</div>
 		</div>
-
 	</div>
 </template>
 
@@ -79,32 +78,34 @@
 			},
 			ranNum(min,max){
 				return Math.floor(Math.random()*(max-min+1)+min);
-			}
-		},
-		mounted() {
-			var _this = this;
-			$('#zh-login').click(function () {
-  				$('.tlw-box-zhuce').css('display','none');
+			},
+			login(){
+				$('.tlw-box-zhuce').css('display','none');
   				$('.zh-warn').css('opacity',0);
-	  		});
-	  		$('#zh-reg').click(function () {
-	  			$('.tlw-box-zhuce').css('display','block');
+				if ($('.input1').val() && $('.input2').val()) {
+					var phone = $('.input1').val();
+					var pwd = $('.input2').val();
+					this.$http.get('/api/user/login',{params:{phone:phone,passWord:pwd}}).then(function(res){
+						
+					});
+				}
+			},
+			register(){
+				$('.tlw-box-zhuce').css('display','block');
 	  			$('.zh-warn').css('opacity',0);
-	  		});
-			one();
-			$(".login-btn").on("click", function() {
+			},
+			test(){
+				var _this = this;
 				var phoneNum = /^1[3578]\d{9}$/;
 				if(!phoneNum.test($('.input1').val())) {
 					$(".phone").css("opacity", "1");
 					$(".input1").focus();
-					return false
+				}else{
+					if($(".input2").val() && $(".input3").val()) {
+						$(".password").css("opacity", "1");
+						$(".code").css("opacity", "1");
+					}
 				}
-				if($(".input2").val().length == 0 && $(".input3").val().length == 0) {
-					$(".password").css("opacity", "1");
-					$(".code").css("opacity", "1");
-				}
-			})
-			function one() {
 				//当input聚焦时，此输入框的边框和内阴影出现
 				$(".tlw-box-inpts>input").on("focus", function() {
 					$(this).css("border", "1px solid #74afec")
@@ -157,6 +158,19 @@
 					}
 				})
 			}
+		},
+		mounted() {
+			this.test();
+			$('#zh-login').click(function () {
+  				$('.tlw-box-zhuce').css('display','none');
+  				$('.zh-warn').css('opacity',0);
+	  		});
+	  		$('#zh-reg').click(function () {
+	  			$('.tlw-box-zhuce').css('display','block');
+	  			$('.zh-warn').css('opacity',0);
+	  		});
+		
+			
 		}
 	}
 	

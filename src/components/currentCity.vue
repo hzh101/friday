@@ -23,13 +23,16 @@
 	export default {
 		methods:{
 			address(){
-				$(".tlw-location-success").show();
+				$(".tlw-location-success").fadeIn(500);
 				setTimeout(function(){
+					$(".tlw-location-success").hide();
 					$(".tlw-Current-City").hide();
 				},1000)
+				return false;
 			},
 			hide(){
 				$(".tlw-Current-City").hide();
+				return false;
 			}
 		}
 	}
