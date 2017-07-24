@@ -22,7 +22,7 @@
 					</div>
 					<div class="tlw-box-auto">
 						<span><input type="checkbox" />自动登录</span>
-						<p>忘记密码？</p>
+						<p @click="reset()">忘记密码？</p>
 					</div>
 					<div class="tlw-box-btn">
 						<button @click="login" class="login-btn1">登录</button>
@@ -57,6 +57,38 @@
 						<button @click="login" class="login-btn2">登录</button>
 					</div>
 				</div>
+				
+				
+				<div class="tlw-box tlw-box-resetPasswords">
+					<div class="tlw-box-top">
+						<h4>重置密码</h4>
+					</div>
+					<div class="tlw-box-inpts">
+						<input class="input1" type="text" placeholder="请输入手机号" />
+						<strong class="phone zh-warn"><em>!</em>请输入手机号</strong>
+						<div class="tlw-reset-code">
+							<input class="input3" type="text" placeholder="验证码" />
+							<img :src='"../../static/imgs/testImage/"+img+".png"' />
+							<span @click="change()">看不清，换一张</span>
+						</div>
+						
+						<strong class="code zh-warn"><em>!</em>请输入验证码</strong>
+						<input class="input2" type="password" placeholder="请输入密码" />
+						<strong class="password zh-warn"><em>!</em>请输入密码</strong>
+						<img class="tlw-eyes tlw-eyes2" src="../images/15.png" />
+						<input type="password" placeholder="请再次输入密码"/>
+						<strong class="password zh-warn"><em>!</em>请输入密码一致</strong>
+						<input class="input4" type="text" placeholder="请输入手机验证码" />
+						<button>手机验证码</button>
+						<strong class="message zh-warn"><em>!</em>请输入短信验证码</strong>
+					</div>
+					
+					<div class="tlw-box-btn">
+						<button @click="submit()" class="register-btn2">提交</button>
+					</div>
+				</div>
+				
+				
 			</div>
 		</div>
 	</div>
@@ -73,13 +105,19 @@
 				bool:true,
 				img:'yan5',
 				imgArr:['yan1','yan2','yan3','yan4','yan5','yan6','yan7','yan8','yan9'],
-				testArr:['EKPK','FWLS','EFLS','MKLO','KWUN','EYCZ','EWRZ','LFNF','KLMR']
+				testArr:['EKPK','FWLS','EFLS','MKLO','KWUN','EYCZ','EWRZ','LFNF','KLMR'],
+				phoneNum:/^1[3578]\d{9}$/
 			}
 		},
 		components:{
 			bullet
 		},
 		methods:{
+			reset(){
+				$(".tlw-box-login").hide();
+				$(".tlw-box-resetPasswords").show();
+				
+			},
 			change(){
 				var index = this.ranNum(0,8);
 				this.img = this.imgArr[index];
@@ -106,6 +144,16 @@
 			register(){
 				$('.tlw-box-zhuce').css('display','block');
 	  			$('.zh-warn').css('opacity',0);
+			},
+			submit(){
+				var phone = $(".tlw-box-resetPasswords .input1").val();
+				if(!phone){
+					$(".phone").show();
+				}else{
+					if(!this.phoneNum.test(phone)){
+						alert("请输入正确手机号！")
+					}
+				}
 			},
 			test(){
 				var _this = this;
@@ -330,6 +378,7 @@
 	
 	.tlw-register .tlw-register-box .tlw-box .tlw-box-auto p {
 		color: #ff6600;
+		cursor: pointer;
 	}
 	
 	.tlw-register .tlw-register-box .tlw-box .tlw-box-btn {
@@ -411,4 +460,51 @@
 		font-size: 30px;
 		padding-left: 20px;
 	}
+	.tlw-register .tlw-register-box .tlw-box-resetPasswords{
+		display: none;
+	}
+	.tlw-register .tlw-register-box .tlw-box-resetPasswords .tlw-box-inpts .tlw-reset-code{
+		
+		position: relative;
+	}
+	.tlw-register .tlw-register-box .tlw-box-resetPasswords .tlw-box-inpts .tlw-reset-code .input3{
+		position: relative;
+		width: 130px;
+	}
+	.tlw-register .tlw-register-box .tlw-box-resetPasswords .tlw-box-inpts .tlw-reset-code img{
+		width: 77px;
+		height: 30px;
+		position: absolute;
+		top: 10px;
+		left: 140px;
+	}
+	.tlw-register .tlw-register-box .tlw-box-resetPasswords .tlw-box-inpts .tlw-reset-code span{
+		position: absolute;
+		right: 0;
+		top: 10px;
+	}
+	.tlw-register .tlw-register-box .tlw-box-resetPasswords .tlw-box-inpts img.tlw-eyes2{
+		top: 150px;
+	}
+	.tlw-register .tlw-register-box .tlw-box-resetPasswords .tlw-box-inpts input:nth-last-of-type(2){
+		width: 317px;
+		height: 32px;
+	}
+	.tlw-register .tlw-register-box .tlw-box-resetPasswords .tlw-box-inpts button {
+		border: none;
+		background: #4b943d;
+		position: absolute;
+		bottom: 27px;
+		right: 1px;
+		padding: 7px 10px;
+		cursor: pointer;
+		color: white;
+	}
+	.tlw-register .tlw-register-box .tlw-box-resetPasswords .tlw-box-btn button{
+		width: 317px;
+	}
+	
+	
+	
+	
 </style>
