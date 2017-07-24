@@ -101,7 +101,7 @@
 				this.getData(this.pushParams);
 			},
 			getData(params){
-				this.$http.get('/goods/more',{params:params}).then(function (res) {
+				this.$http.get('/api/goods/more',{params:params}).then(function (res) {
 					this.showGoods = res.data;
 //					console.log(this.showGoods)
 				});

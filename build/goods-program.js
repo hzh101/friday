@@ -1,11 +1,17 @@
 /**
  * Created by lanouhn on 17/7/19.
  */
+var express = require('express');
+var app = express();
+var router = express.Router();
+var userRouter = express.Router();
+
 //var bodyParser = require('body-parser')
 //var urlencodeParser = bodyParser.urlencoded();
-var devServer = require('./dev-server')
-var app = devServer.app
-var router = devServer.router
+//var devServer = require('./dev-server')
+//var app = devServer.app
+//var router = devServer.router;
+//var userRouter = devServer.userRouter;
 
 var mysql = require("mysql");
 
@@ -32,7 +38,23 @@ var fastFood = 'SELECT * FROM goods WHERE firstType="蛋奶速食" LIMIT 0,4';
 var global = 'SELECT * FROM goods WHERE firstType="全球代购" LIMIT 0,4';
 var fruit = 'SELECT * FROM goods WHERE firstType="新鲜水果" LIMIT 0,4';
 
-var arr = [friday,greens,meat,fish,goodFood,wine,fastFood,global,fruit];
+//登录
+userRouter.get('/login',function (req,res) {
+	var phone = req.query.phone;
+	var passWord = req.passWord;
+	var user = 'SELECT passWord FROM user WHERE phone='+phone;
+	link.query(user,function(err,result){
+		if (err) {
+			console.log(err)
+		} else{
+			if (result.length==0) {
+				res.send("0");
+			}else{
+				console.log(result)
+			}
+		}
+	})
+})
 
 //进入页面的展示数据的接口
 router.get('',function (req,res) {
@@ -84,7 +106,6 @@ router.get('',function (req,res) {
         }
     });
 });
-
 //详情页 展示
 router.get('/detail',function (req,res) {
     var id = req.query.id;
@@ -95,7 +116,6 @@ router.get('/detail',function (req,res) {
         }
     })
 });
-
 //首页点击 更多 的几口
 router.get('/more',function (req,res) {
 	var firstType = req.query.firstType;
@@ -108,7 +128,6 @@ router.get('/more',function (req,res) {
 		        }
 		    });
 		} else{
-			console.log(111)
 			var firstSql = 'SELECT * FROM goods WHERE firstType="'+firstType+'"';
 			link.query(firstSql,function (err, result) {
 		        if (!err){
@@ -117,7 +136,6 @@ router.get('/more',function (req,res) {
 		    });
 		}
 	} else{
-		console.log(222)
 		var secondSql = 'SELECT * FROM goods WHERE firstType="' + firstType + '"AND  secondType="' + secondType + '"';
 		link.query(secondSql,function (err, result) {
 	        if (!err){
@@ -140,4 +158,8 @@ app.all('*', function(req, res, next) {
     next();
 });
 
+app.use('/user',userRouter);
 app.use('/goods',router);
+app.listen(8000);
+console.log('服务器创建成功')
+

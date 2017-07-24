@@ -167,7 +167,7 @@
 		},
 		created(){
 			var id = this.$route.query.id;
-			this.$http.get('http://localhost:8080/goods/detail?id='+id).then(function (res) {
+			this.$http.get('/api/goods/detail?id='+id).then(function (res) {
 				this.data = res.data[0];
 			});
 		},

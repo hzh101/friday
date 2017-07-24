@@ -25,11 +25,13 @@ var app = express()
 
 
 /******这里是引入自己写服务器文件**需要先把app传出去********/
-exports.app = app
-var router = express.Router()
-exports.router = router
-
-require('./goods-program');
+//exports.app = app
+//var router = express.Router()
+//var userRouter = express.Router();
+//exports.userRouter = userRouter;
+//exports.router = router;
+//
+//require('./goods-program');
 
 /**************/
 

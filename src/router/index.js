@@ -59,6 +59,7 @@ for (var i = 0; i < typeRoute.route.length; i++) {
 Vue.use(Router)
 
 const router = new Router({
+	mode:'history',
 	routes: [
 	    {path: '/tlw1',component: tlw1},
 	    {path: '/tlw2',component: tlw2},
