@@ -76,8 +76,8 @@
 						<input class="input2" type="password" placeholder="请输入密码" />
 						<strong class="password zh-warn"><em>!</em>请输入密码</strong>
 						<img class="tlw-eyes tlw-eyes2" src="../images/15.png" />
-						<input type="password" placeholder="请再次输入密码"/>
-						<strong class="password zh-warn"><em>!</em>请输入密码一致</strong>
+						<input class="input5" type="password" placeholder="请再次输入密码"/>
+						<strong class="password2 zh-warn"><em>!</em>请输入密码一致</strong>
 						<input class="input4" type="text" placeholder="请输入手机验证码" />
 						<button>手机验证码</button>
 						<strong class="message zh-warn"><em>!</em>请输入短信验证码</strong>
@@ -147,11 +147,20 @@
 			},
 			submit(){
 				var phone = $(".tlw-box-resetPasswords .input1").val();
+				var passWord1 = $(".tlw-box-resetPasswords .input2").val();
+				var passWord2 = $(".tlw-box-resetPasswords .input5").val();
 				if(!phone){
 					$(".phone").show();
 				}else{
 					if(!this.phoneNum.test(phone)){
 						alert("请输入正确手机号！")
+					}else{
+						if(passWord1==passWord2){
+							$(".password").css("opacity","0")
+							$(".password2").css("opacity","0")
+						}else{
+							$(".password2").css("opacity","1")
+						}
 					}
 				}
 			},

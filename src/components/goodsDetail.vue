@@ -170,6 +170,12 @@
 				this.data = res.data[0];
 			});
 		},
+		activated(){
+			var id = this.$route.query.id;
+			this.$http.get('/api/goods/detail?id='+id).then(function (res) {
+				this.data = res.data[0];
+			});
+		},
 		mounted() {
 			var index = 0;
 			//点击图片放大显示

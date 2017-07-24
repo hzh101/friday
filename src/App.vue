@@ -23,7 +23,7 @@ export default {
 			
 		}
 	},
-  name: 'app',
+name: 'app',
   components:{
   		topNav,
 		heads,
