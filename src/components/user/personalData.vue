@@ -28,10 +28,10 @@
 				</div>
 				<div class="tlw-myPhoneNum">
 					<p>手机：</p>
-					<input type="text" />
+					<input type="text"/>
 					<span>更换手机</span>
 				</div>
-				<button>确认提交</button>
+				<button @click="submit()">确认提交</button>
 			</div>
 		</div>
 	</div>
@@ -42,7 +42,7 @@
 		methods: {
 			creatYear() {
 				var year = "";
-				for(var i = 1980; i < 2018; i++) {
+				for(var i = 1949; i < 2018; i++) {
 					year += "<option>" + i + "</option>"
 				}
 				$("#year").html(year);

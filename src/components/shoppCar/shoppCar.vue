@@ -3,7 +3,7 @@
 		<h2><span>&nbsp;</span>购物车</h2>
 		<table>
 			<tr>
-				<th><input type="checkbox"/></th>
+				<th><input  @click="headAll()" type="checkbox"/></th>
 				<th>礼拜五生鲜</th>
 				<th>规格</th>
 				<th>数量</th>
@@ -11,26 +11,79 @@
 				<th>金额</th>
 				<th>操作</th>
 			</tr>
-			<tr>
+			<tr v-for="(item,index) in data">
 				<td><input type="checkbox"/></td>
 				<td>
-					<img src="static/imgs/fish-a1.png"/>
-					<strong>青柠檬</strong>
+					<img :src='"static/imgs/"+item.img'/>
+					<strong>{{item.title}}</strong>
 				</td>
 				<td>无</td>
 				<td>
-					<span>-</span><input type="text" value="2"/><span>+</span>
+					<span @click="sub(index)">-</span><input type="text" v-model="item.count"/><span @click="add(index)">+</span>
 				</td>
-				<td>4</td>
-				<td>4</td>
-				<td>4</td>
+				<td>¥{{item.price}}</td>
+				<td>¥{{item.count*item.price}}</td>
+				<td><button @click="del(index)" class="delete">删除</button></td>
+			</tr>
+			<tr class="foot">
+				<td colspan="7">
+					<div class="total">
+						<strong>商品金额</strong>
+						<span>¥</span>
+						<span>0.00</span>
+					</div>
+				</td>
 			</tr>
 		</table>
+		<div class="footHandle">
+			<button @click="allCheck">全选</button>
+			<button>批量删除</button>
+			<button class="buy">立即购买</button>
+			<div class="total">
+				<strong>商品金额</strong>
+				<span>¥</span>
+				<span>0.00</span>
+			</div>
+		</div>
 	</div>
 </template>
 
 <script>
-	export default {}
+	export default {
+		data(){
+			return{
+				data:[
+					{img:"fish-a1.png",title:'橙汁',count:1,price:2},
+					{img:"fish-b1.png",title:'橙汁47979',count:3,price:3},
+					{img:"fish-c1.png",title:'橙汁2344',count:2,price:2}
+				]
+			}
+		},
+		methods:{
+			sub(index){
+				this.data[index].count--;
+				if (this.data[index].count<=0) {
+					this.data[index].count = 0;
+				}
+			},
+			add(index){
+				this.data[index].count++;
+			},
+			del(index){
+				this.data.splice(index,1)
+			},
+			headAll(){
+				if ($('.shopping-cart th input:checked').prop('checked')) {
+					$('.shopping-cart td input:checkbox').prop('checked',true);
+				} else{
+					$('.shopping-cart td input:checkbox').prop('checked',false);
+				}
+			},
+			allCheck(){
+				$('.shopping-cart tr input:checkbox').prop('checked',true);
+			}
+		}
+	}
 </script>
 
 <style lang="less" scoped>
@@ -124,8 +177,67 @@
 				}
 				th:nth-of-type(7),td:nth-of-type(7){
 					width: 64px;
+					.delete{
+						border: none;
+						background-color: #fff;
+						font-size: 14px;
+					}
+				}
+			}
+			.foot{
+				height:69px;
+				td{
+					font-size: 18px;
 				}
 			}
 		}
 	}
+	.footHandle{
+		width: 1278px;
+		margin: 50px 0;
+		overflow: hidden;
+		button{
+			background-color: #FFFFFF;
+			border: none;
+			font-size: 14px;
+			color: #4B943D;
+			padding-top: 10px;
+			margin-left: 20px;
+			margin-right: 20px;
+		}
+		.total{
+			padding-top: 10px;
+		}
+		.buy{
+			float: right;
+			width: 150px;
+			font-size: 20px;
+			height: 40px;
+			background-color: #F08200;
+			color: #fff;
+			border-radius: 5px;
+			padding: 0;
+			margin: 0;
+		}
+	}
+	.total{
+			float:right;
+			width: 300px;
+			font-size: 18px;
+			strong{
+				color: #666;
+			}
+			span{
+				color: red;
+				font-size: 20px;
+			}
+			span:nth-of-type(1){
+				margin-left: 20px;
+			}
+			span:nth-of-type(2){
+				display: inline-block;
+				width: 100px;
+				text-align: left;
+			}
+		}
 </style>
