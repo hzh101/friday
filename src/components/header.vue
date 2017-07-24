@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="tlw-top-nav">
 		<!--header-->
 		<div class="nav-second-lyc">
 			<a href=""><h1><img src="../img/1.png"/></h1></a>	
@@ -30,20 +30,23 @@
 </template>
 
 <script>
-	export default{}
+	export default{
+		
+	}
 </script>
 
 <style scoped>
 
 .nav-second-lyc {
 	width: 1280px;
-	height: 69px;
+	height: 100px;
 	margin: 0 auto;
 	margin-top: 25px;
 	position: relative;
 	margin-bottom: 50px;
 }
 .nav-second-lyc a h1 {
+	margin-top: 10px;
 	display: inline-block;
 }
 .nav-second-lyc input {
@@ -56,7 +59,7 @@
 	box-sizing:border-box;
 	border:2px solid green;
 	position: absolute;
-	bottom: 0;
+	bottom: 30px;
 	margin-left: 103px;
 }
 .nav-second-lyc button {
@@ -65,7 +68,7 @@
 	height:40px;
 	background:green;
 	position:absolute;
-	bottom: 0;
+	bottom: 30px;
 	right:311px;
 	text-align:center;
 	cursor: pointer;
@@ -85,13 +88,13 @@
 .nav-second-user-lyc {
 	position: absolute;
 	right: 145px;
-	bottom: 0;
+	bottom: 30px;
 }
 .nav-second-user-lyc a{color: #000;}
 .nav-second-shoppingcar-lyc {
 	position: absolute;
 	right: 0;
-	bottom: 0;
+	bottom: 30px;
 }
 .nav-second-shoppingcar-lyc img:last-child {
 	position: absolute;
@@ -109,7 +112,7 @@
 .nav-second-bottom-lyc {
 	position: absolute;
 	left: 466px;
-	bottom: -25px;
+	bottom: 5px;
 }
 .nav-second-bottom-lyc a {
 	display: inline-block;

@@ -1,7 +1,7 @@
 <template>
 	<div>
-	<cont-nav></cont-nav>
-	<router-view></router-view>
+		<cont-nav></cont-nav>
+		<router-view></router-view>
 	</div>
 </template>
 
@@ -12,8 +12,10 @@
 		components:{
 			contNav
 		}
+		
 	}
 </script>
 
 <style scoped>
+
 </style>

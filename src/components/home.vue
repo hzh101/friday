@@ -92,7 +92,7 @@
 				
 				//倒计时
 				function getRTime() {
-					var EndTime = new Date('2017/07/26 10:00:00');
+					var EndTime = new Date('2017/07/30 10:00:00');
 					var NowTime = new Date();
 					var t = EndTime.getTime() - NowTime.getTime();
 					var d = Math.floor(t / 1000 / 60 / 60 / 24);
