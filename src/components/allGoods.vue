@@ -103,7 +103,7 @@
 			getData(params){
 				this.$http.get('/api/goods/more',{params:params}).then(function (res) {
 					this.showGoods = res.data;
-//					console.log(this.showGoods)
+					console.log(this.showGoods)
 				});
 			}
 		},
