@@ -14,6 +14,9 @@ require("static/js/swiper.min.js");
 
 
 
+
+
+
 Vue.use(VueResource)
 Vue.config.productionTip = false
 

@@ -69,7 +69,6 @@ export default {
 }
 .zh-list li{
 	float: left;
-	width: 180px;
 	line-height: 50px;
 }
 .router-link-active, .zh-list li:hover{
@@ -80,9 +79,8 @@ export default {
 	border: none;
 }
 .zh-list li span{
-	display: block;
 	border-left: 1px solid #E8E8E8;
-	width: 170px;
+	padding: 0 70px;
 	text-align: center;
 }
 .zh-kinds,.zh-list{

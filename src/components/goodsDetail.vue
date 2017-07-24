@@ -18,7 +18,7 @@
 				</div>
 				<!--放大区域-->
 				<div class="big-lyc">
-					<img src="" class="seven" />
+					<img :src='"static/imgs/"+data.images' class="seven" />
 				</div>
 				<div class="detail-first-right-lyc">
 					<span>{{data.name}}</span>

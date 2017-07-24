@@ -98,6 +98,7 @@
 				$('.zh-secondType dd').removeClass('router-link-active');
 				this.secondType = this.itemArr[index].title;
 				this.pushParams = {firstType:this.firstType, secondType:this.secondType};
+				console.log(this.pushParams)
 				
 //				调用后台请求函数
 				this.getData(this.pushParams);
@@ -112,12 +113,18 @@
 		created(){
 			var params = this.$route.query;
 			this.firstType = params.firstType;
-			
 			//调用后台请求函数
 			this.getData(params);
 		},
-		mounted(){
-			
+		updated(){
+			if (this.firstType || this.secondType) {
+				localStorage.setItem('first',this.firstType);
+				localStorage.setItem('second',this.secondType);
+			}
+		},
+		activated(){
+			var params = {firstType:localStorage.getItem('first'), secondType:localStorage.getItem('second')};
+			this.getData(params);
 		}
 	}
 </script>
