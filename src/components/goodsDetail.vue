@@ -23,10 +23,10 @@
 				<div class="detail-first-right-lyc">
 					<span>{{data.name}}</span>
 					<div class="first-right-seclect-lyc">
-						<a href="###" class="area">全国</a>
-						<a href="###" class="area">礼拜五</a>
-						<a href="###" class="area">次日达</a>
-						<a href="###" class="area">自营</a>
+						<a href="javascript:void(0)" class="area">全国</a>
+						<a href="javascript:void(0)" class="area">礼拜五</a>
+						<a href="javascript:void(0)" class="area">次日达</a>
+						<a href="javascript:void(0)" class="area">自营</a>
 					</div>
 					<div class="first-right-product-lyc">
 						<div class="right-product-left-lyc">
@@ -39,9 +39,9 @@
 						<h3><span>现价&nbsp;&nbsp;:&nbsp;&nbsp;¥&nbsp;{{data.price}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>原价&nbsp;&nbsp;:&nbsp;&nbsp;¥{{data.oldPrice}}</span></h3>
 						<h4>
 							<span  class="price">请选择规格</span>
-							<a href="###">500g</a>
-							<a href="###">1000g</a>
-							<a href="###">2000g</a>
+							<a href="javascript:void(0)">500g</a>
+							<a href="javascript:void(0)">1000g</a>
+							<a href="javascript:void(0)">2000g</a>
 						</h4>
 					</div>
 					<div class="first-right-count-lyc">
@@ -494,11 +494,13 @@
 		width: 34px;
 		height: 34px;
 		background: #f2f2f2;
+		cursor: pointer;
+		font-size: 24px;
 	}
 	
 	.count-lyc input {
 		width: 71px;
-		height: 32px;
+		height: 30px;
 		text-align: center;
 		border: 1px solid #f2f2f2;
 		vertical-align: top;
@@ -516,6 +518,7 @@
 		font-size: 20px;
 		color: #fff;
 		border-radius: 3px;
+		cursor: pointer;
 	}
 	
 	.right-count-button-lyc button:first-child {

@@ -4,8 +4,8 @@
 			<span>最近浏览</span>
 		</div>
 		<ul class="browse-content-lyc">
-			<li v-if="show">
-				<a href="javascript:void(0)" v-on:click="hide()"><img src="../../img/绿叉.png"/></a>
+			<li v-for="index in num" ref="li">
+				<a href="javascript:void(0)" v-on:click="hide(index)"><img src="../../img/绿叉.png"/></a>
 				<a href="javascript:void(0)"><img src="../../img/car.png"/></a>
 				<h3>新西兰佳沛黄金奇异果</h3>
 				<p>果肉绵密,花蜜般的甘甜百吃不厌</p>
@@ -14,7 +14,7 @@
 					<span>¥40.00</span>
 				</p>
 			</li>
-			<li v-if="show">
+			<!-- <li v-if="show">
 				<a href="javascript:void(0)" v-on:click="hide()"><img src="../../img/绿叉.png"/></a>
 				<a href="javascript:void(0)"><img src="../../img/car.png"/></a>
 				<h3>新西兰佳沛黄金奇异果</h3>
@@ -33,7 +33,7 @@
 					<span>¥28.80</span>
 					<span>¥40.00</span>
 				</p>
-			</li>
+			</li> -->
 		</ul>
 	</div>
 </template>
@@ -42,12 +42,13 @@
 	export default {
 		data() {
 			return{
-			show:true,
+//			show:true,
+			num:3
 			}
 		},
 		methods:{
-			hide:function() {
-				this.show = false
+			hide:function(index) {
+				this.$ref.li[index].display = 'none';
 			}
 		}
 	}
