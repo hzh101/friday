@@ -1,5 +1,5 @@
 <template>
-	<div class="tlw-top-nav">
+	<div class="nav-top-lyc">
 		<!--header-->
 		<div class="nav-second-lyc">
 			<a href=""><h1><img src="../img/1.png"/></h1></a>	
@@ -31,38 +31,50 @@
 
 <script>
 	export default{
-<<<<<<< HEAD
-		
-=======
 		created(){
 			$(window).scroll(function(){
 				var height = $(document).scrollTop();
-				if(height>170){
+				if(height > 170){
 					$(".nav-second-lyc").addClass("nav-second-tlw");
-					$(".nav-second-tlw").css({"width:1280px","height: 100px",})
+					$(".nav-top-lyc").addClass("nav-top-tlw");
 				}else{
-					
+					$(".nav-second-lyc").removeClass("nav-second-tlw");
+					$(".nav-top-lyc").removeClass("nav-top-tlw");
 				}
 			})
 		}
->>>>>>> 627c4b5a0b4b04d91ed2e438317d56ae28aac06e
 	}
 </script>
 
 <style scoped>
-/*.nav-second-tlw {
-	background: greenyellow;
-}*/
+.nav-top-tlw {
+	width: 100%;
+	height: 105px;
+	background: #fff;
+	border-bottom: 1px solid #ddd;
+	position: fixed;
+	top: 0;
+	z-index: 100;
+}
 .nav-second-lyc {
 	width: 1280px;
-	height: 100px;
+	height: 69px;
 	margin: 0 auto;
 	margin-top: 25px;
 	position: relative;
 	margin-bottom: 50px;
 }
+.nav-second-tlw {
+	width: 1280px;
+	height: 69px;
+	/*background: greenyellow;*/
+	position: fixed;
+	left: 50%;
+	margin-left: -640px;
+	top: -22px;
+	z-index: 99;
+}
 .nav-second-lyc a h1 {
-	margin-top: 10px;
 	display: inline-block;
 }
 .nav-second-lyc input {
@@ -75,7 +87,7 @@
 	box-sizing:border-box;
 	border:2px solid green;
 	position: absolute;
-	bottom: 30px;
+	bottom: 0;
 	margin-left: 103px;
 }
 .nav-second-lyc button {
@@ -84,7 +96,7 @@
 	height:40px;
 	background:green;
 	position:absolute;
-	bottom: 30px;
+	bottom: 0;
 	right:311px;
 	text-align:center;
 	cursor: pointer;
@@ -105,13 +117,13 @@
 .nav-second-user-lyc {
 	position: absolute;
 	right: 145px;
-	bottom: 30px;
+	bottom: 0;
 }
 .nav-second-user-lyc a{color: #000;}
 .nav-second-shoppingcar-lyc {
 	position: absolute;
 	right: 0;
-	bottom: 30px;
+	bottom: 0;
 }
 .nav-second-shoppingcar-lyc img:last-child {
 	position: absolute;
@@ -129,7 +141,7 @@
 .nav-second-bottom-lyc {
 	position: absolute;
 	left: 466px;
-	bottom: 5px;
+	bottom: -25px;
 }
 .nav-second-bottom-lyc a {
 	display: inline-block;
