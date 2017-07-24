@@ -71,6 +71,7 @@
 	cursor: pointer;
 	color: #FFFFFF;
 	font-size: 16px;
+	border: none;
 }
 .nav-second-user-lyc, .nav-second-shoppingcar-lyc {
 	display: inline-block;
