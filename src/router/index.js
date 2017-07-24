@@ -38,8 +38,6 @@ import shoppCar from 'components/shoppCar/shoppCar';
 
 import typeRoute from '../data/typeRoute.json';
 
-
-
 var childRoute = [];
 for (var i = 0; i < typeRoute.route.length; i++) {
 	childRoute.push({path:typeRoute.route[i].path, component:moreGoods});
@@ -55,50 +53,52 @@ Vue.use(Router)
 const router = new Router({
 	mode:'history',
 	routes: [
-		
+
 		{path: '/',redirect: '/login'},
 		{path: '/login',component: login},
-		{path: '/home',component: home},
 		{
-			path: '/home/all',component: allGoods,
-			children:childRoute
-		},
-		
-		{path:'/detail', component: goodsDetail},
-		
-		{path: '/footOne',component: footNavOne},
-		{path: '/footTwo',component: footNavTwo},
-		{path: '/footThree',component: footNavThree},
-		{path: '/footFour',component: footNavFour},
-		{path: '/footFive',component: footNavFive},
-		
-		{path: '/local',component: local},
-		{path: '/friday',component: friday},
-		{path: '/integral',component: integral},
-		{
-			path: '/user',component: user,
+			path: '/index',component: index,
 			children:[
-				//交易管理
-				{path: '/user/index',component:myAccount},
-				{path: '/user/myOrder',component:myOrder},
-				{path: '/user/myIntegral',component:myIntegral},
-				{path: '/user/orderScore',component:orderScore},
-				{path: '/user/myWallet',component:myWallet},
-				{path: '/user/refillCar',component:refillCar},
-				//会员资料
-				{path: '/user/personalData',component:personalData},
-				{path: '/user/address',component:address},
-				{path: '/user/myFavorite',component:myFavorite},
-				{path: '/user/recently',component:recently},
-				{path: '/user/passwords',component:passwords},
-				//站内信
-				{path: '/user/message',component:message},
-				{path: '/user/feedback',component:feedback}
+				{path: '/home',component: home},
+				{
+					path: '/home/all',component: allGoods,
+					children:childRoute
+				},
+				{path:'/detail', component: goodsDetail},
+				{path: '/local',component: local},
+				{path: '/friday',component: friday},
+				{path: '/integral',component: integral},
+				{
+					path: '/user',component: user,
+					children:[
+						//交易管理
+						{path: '/user/index',component:myAccount},
+						{path: '/user/myOrder',component:myOrder},
+						{path: '/user/myIntegral',component:myIntegral},
+						{path: '/user/orderScore',component:orderScore},
+						{path: '/user/myWallet',component:myWallet},
+						{path: '/user/refillCar',component:refillCar},
+						//会员资料
+						{path: '/user/personalData',component:personalData},
+						{path: '/user/address',component:address},
+						{path: '/user/myFavorite',component:myFavorite},
+						{path: '/user/recently',component:recently},
+						{path: '/user/passwords',component:passwords},
+						//站内信
+						{path: '/user/message',component:message},
+						{path: '/user/feedback',component:feedback}
+					]
+				},
+				//购物车
+				{path: '/shoppCar',component: shoppCar},
+				
+				{path: '/footOne',component: footNavOne},
+				{path: '/footTwo',component: footNavTwo},
+				{path: '/footThree',component: footNavThree},
+				{path: '/footFour',component: footNavFour},
+				{path: '/footFive',component: footNavFive},
 			]
-		},
-		//购物车
-		{path: '/shoppCar',component: shoppCar},
-	    
+		},    
 	]
 });
 

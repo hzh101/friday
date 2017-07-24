@@ -59,6 +59,7 @@
 				pushParams:{},
 				goodsArr:[],
 				showGoods:[]
+				
 			}
 		},
 		components:{
