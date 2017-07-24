@@ -10,7 +10,7 @@
 			<!--全部的服务类型详情-->
 			<div class="tlw-all">
 				<ul>
-					<li v-for="(item,index) in service">
+					<router-link :to="{path:'/detail',query:{title:item.title}}" v-for="(item,index) in service" tag='li'>
 						<img :src='"../images/tc"+(index+1)+".jpg"' />
 						<h2>{{item.title}}</h2>
 						<div class="tlw-comment">
@@ -18,7 +18,7 @@
 							<span>¥{{item.price}} / 人</span>
 						</div>
 						<p>{{item.from}}</p>
-					</li>
+					</router-link>
 				</ul>
 			</div>
 		</div>

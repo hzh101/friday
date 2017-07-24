@@ -31,12 +31,28 @@
 
 <script>
 	export default{
+<<<<<<< HEAD
 		
+=======
+		created(){
+			$(window).scroll(function(){
+				var height = $(document).scrollTop();
+				if(height>170){
+					$(".nav-second-lyc").addClass("nav-second-tlw");
+					$(".nav-second-tlw").css({"width:1280px","height: 100px",})
+				}else{
+					
+				}
+			})
+		}
+>>>>>>> 627c4b5a0b4b04d91ed2e438317d56ae28aac06e
 	}
 </script>
 
 <style scoped>
-
+/*.nav-second-tlw {
+	background: greenyellow;
+}*/
 .nav-second-lyc {
 	width: 1280px;
 	height: 100px;
@@ -74,6 +90,7 @@
 	cursor: pointer;
 	color: #FFFFFF;
 	font-size: 16px;
+	border: none;
 }
 .nav-second-user-lyc, .nav-second-shoppingcar-lyc {
 	display: inline-block;

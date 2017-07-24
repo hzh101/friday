@@ -7,7 +7,7 @@
 				<dd class="zh-all1">
 					<span @click="allGet()">全部</span>
 				</dd>
-				<router-link :to='item.path' tag='dd' v-for="(item,index) in route" key='index'>
+				<router-link :to='item.path' tag='dd' v-for="(item,index) in route" key='index' :class='item.title==firstType ? "zhactive": ""'>
 					<span @click="itemGet(index,$event)">
 						{{item.title}}
 					</span>
@@ -40,13 +40,14 @@
 				</dl>
 			</div>
 		</div>
-		<router-view :showGoods="showGoods"></router-view>
+		<more-goods :showGoods="showGoods"></more-goods>
 	</div>
 </template>
 
 <script>
 	import typeRoute from '../data/typeRoute.json';
 	import breadNav from './breadNav';
+	import moreGoods from './moreGoods';
 	
 	export default{
 		data() {
@@ -63,7 +64,8 @@
 			}
 		},
 		components:{
-			breadNav 
+			breadNav,
+			moreGoods
 		},
 		methods:{
 			allGet(){
@@ -96,6 +98,7 @@
 				$('.zh-secondType dd').removeClass('router-link-active');
 				this.secondType = this.itemArr[index].title;
 				this.pushParams = {firstType:this.firstType, secondType:this.secondType};
+				console.log(this.pushParams)
 				
 //				调用后台请求函数
 				this.getData(this.pushParams);
@@ -103,15 +106,24 @@
 			getData(params){
 				this.$http.get('/api/goods/more',{params:params}).then(function (res) {
 					this.showGoods = res.data;
-					console.log(this.showGoods)
+//					console.log(this.showGoods)
 				});
 			}
 		},
 		created(){
 			var params = this.$route.query;
 			this.firstType = params.firstType;
-			
 			//调用后台请求函数
+			this.getData(params);
+		},
+		updated(){
+			if (this.firstType || this.secondType) {
+				localStorage.setItem('first',this.firstType);
+				localStorage.setItem('second',this.secondType);
+			}
+		},
+		activated(){
+			var params = {firstType:localStorage.getItem('first'), secondType:localStorage.getItem('second')};
 			this.getData(params);
 		}
 	}

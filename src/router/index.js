@@ -103,8 +103,5 @@ const router = new Router({
 });
 
 
-//router.afterEach((to, from, next) => {
-//  console.log(from.query);
-//});
 
 export default router;

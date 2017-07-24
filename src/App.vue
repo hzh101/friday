@@ -2,7 +2,9 @@
   <div id="app">
 	  	<top-nav></top-nav>
 	  	<heads></heads>
-	  	<router-view></router-view>
+	  	<keep-alive>
+		  	<router-view></router-view>
+	  	</keep-alive>
     <bottom-nav></bottom-nav>
     <foot></foot>
   </div>
@@ -23,7 +25,7 @@ export default {
 			
 		}
 	},
-  name: 'app',
+name: 'app',
   components:{
   		topNav,
 		heads,

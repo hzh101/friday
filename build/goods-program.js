@@ -16,6 +16,7 @@ var urlencodeParser = bodyParser.urlencoded();
 var mysql = require("mysql");
 
 var link = mysql.createConnection({
+    host:"10.90.85.229",
 	host: "10.90.85.229",
 	user: "root",
 	password: "",

@@ -4,15 +4,22 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import VueResource from 'vue-resource'
-import $ from 'jquery'
+import $ from 'jquery';
+
+require("static/css/swiper.min.css");
+require("static/font/iconfont.css");
+require("static/css/reset.css");
+require("static/js/swiper.jquery.min.js");
+require("static/js/swiper.min.js");
+
+
+
+
 
 
 Vue.use(VueResource)
 Vue.config.productionTip = false
 
-//router.afterEach((to, from, next) => {
-//  console.log(from.query);
-//});
 
 
 new Vue({
