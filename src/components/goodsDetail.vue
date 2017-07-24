@@ -11,7 +11,7 @@
 					<div class="first-left-bottom-lyc">
 						<img src="../img/leftJT.png" class="first zh-frist" />
 						<div class="zh-box">
-							<img :src='"static/imgs/"+data.images' class="second  one" />
+							<img :src='"static/imgs/"+data.images' class="second one" />
 						</div>
 						<img src="../img/rightJT.png" class="first zh-frist" />
 					</div>
@@ -159,7 +159,6 @@
 				this.bool = !this.bool;
 				$('.detail-product-nav-lyc a').removeClass('change');
 				$(ev.target).addClass('change');
-				
 			}
 		},
 		components: {
@@ -222,8 +221,15 @@
 			var bigImg = document.getElementsByClassName("seven")[0];
 			small.onmousemove = function(e) {
 				var even = e || event;
+				//滚轮高度      
+				var st;
+				if(document.body.scrollTop){
+					st = document.body.scrollTop;//获取谷歌的滚轮高度
+				}else{
+					st = document.documentElement.scrollTop;//获取火狐的滚轮高度
+				};
 				var x = even.clientX - zoom.offsetWidth / 2 - $('.left-lyc').offset().left;
-				var y = even.clientY - zoom.offsetHeight / 2 - $('.left-lyc').offset().top;
+				var y = even.clientY - zoom.offsetHeight / 2 - $('.left-lyc').offset().top +st;
 				//水平方向的left最大临界值
 				var maxX = small.clientWidth - zoom.clientWidth;
 				if(x < 0) {

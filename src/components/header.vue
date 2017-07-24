@@ -30,11 +30,25 @@
 </template>
 
 <script>
-	export default{}
+	export default{
+		created(){
+			$(window).scroll(function(){
+				var height = $(document).scrollTop();
+				if(height>170){
+					$(".nav-second-lyc").addClass("nav-second-tlw");
+					$(".nav-second-tlw").css({"width:1280px","height: 100px",})
+				}else{
+					
+				}
+			})
+		}
+	}
 </script>
 
 <style scoped>
-
+/*.nav-second-tlw {
+	background: greenyellow;
+}*/
 .nav-second-lyc {
 	width: 1280px;
 	height: 69px;
@@ -71,6 +85,7 @@
 	cursor: pointer;
 	color: #FFFFFF;
 	font-size: 16px;
+	border: none;
 }
 .nav-second-user-lyc, .nav-second-shoppingcar-lyc {
 	display: inline-block;
