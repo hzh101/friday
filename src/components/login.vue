@@ -66,13 +66,13 @@
 						<input class="input1" type="text" placeholder="请输入手机号" />
 						<strong class="phone zh-warn"><em>!</em>请输入手机号</strong>
 						<div class="tlw-reset-code">
-							<input class="input2" type="text" placeholder="验证码" />
+							<input class="input3" type="text" placeholder="验证码" />
 							<img :src='"../../static/imgs/testImage/"+img+".png"' />
 							<span @click="change()">看不清，换一张</span>
 						</div>
 						
 						<strong class="code zh-warn"><em>!</em>请输入验证码</strong>
-						<input class="input3" type="password" placeholder="请输入密码" />
+						<input class="input2" type="password" placeholder="请输入密码" />
 						<strong class="password zh-warn"><em>!</em>请输入密码</strong>
 						<img class="tlw-eyes tlw-eyes2" src="../images/15.png" />
 						<input type="password" placeholder="请再次输入密码"/>
@@ -83,7 +83,7 @@
 					</div>
 					
 					<div class="tlw-box-btn">
-						<button class="register-btn2">提交</button>
+						<button @click="submit()" class="register-btn2">提交</button>
 					</div>
 				</div>
 				
@@ -100,12 +100,15 @@
 				bool:true,
 				img:'yan5',
 				imgArr:['yan1','yan2','yan3','yan4','yan5','yan6','yan7','yan8','yan9'],
-				testArr:['EKPK','FWLS','EFLS','MKLO','KWUN','EYCZ','EWRZ','LFNF','KLMR']
+				testArr:['EKPK','FWLS','EFLS','MKLO','KWUN','EYCZ','EWRZ','LFNF','KLMR'],
+				phoneNum:/^1[3578]\d{9}$/
 			}
 		},
 		methods:{
 			reset(){
-				$(".tlw-box-login").hide(); 
+				$(".tlw-box-login").hide();
+				$(".tlw-box-resetPasswords").show();
+				
 			},
 			change(){
 				var index = this.ranNum(0,8);
@@ -128,6 +131,16 @@
 			register(){
 				$('.tlw-box-zhuce').css('display','block');
 	  			$('.zh-warn').css('opacity',0);
+			},
+			submit(){
+				var phone = $(".tlw-box-resetPasswords .input1").val();
+				if(!phone){
+					$(".phone").show();
+				}else{
+					if(!this.phoneNum.test(phone)){
+						alert("请输入正确手机号！")
+					}
+				}
 			},
 			test(){
 				var _this = this;
@@ -383,7 +396,7 @@
 		position: absolute;
 		top: 0;
 		z-index: 10;
-		/*display: none;*/
+		display: none;
 	}
 	
 	.tlw-register .tlw-register-box .tlw-box-zhuce .tlw-box-inpts input:nth-of-type(4) {
@@ -428,11 +441,14 @@
 		font-size: 30px;
 		padding-left: 20px;
 	}
+	.tlw-register .tlw-register-box .tlw-box-resetPasswords{
+		display: none;
+	}
 	.tlw-register .tlw-register-box .tlw-box-resetPasswords .tlw-box-inpts .tlw-reset-code{
 		
 		position: relative;
 	}
-	.tlw-register .tlw-register-box .tlw-box-resetPasswords .tlw-box-inpts .tlw-reset-code .input2{
+	.tlw-register .tlw-register-box .tlw-box-resetPasswords .tlw-box-inpts .tlw-reset-code .input3{
 		position: relative;
 		width: 130px;
 	}
@@ -451,7 +467,7 @@
 	.tlw-register .tlw-register-box .tlw-box-resetPasswords .tlw-box-inpts img.tlw-eyes2{
 		top: 150px;
 	}
-	.tlw-register .tlw-register-box .tlw-box-resetPasswords .tlw-box-inpts input:nth-of-type(3){
+	.tlw-register .tlw-register-box .tlw-box-resetPasswords .tlw-box-inpts input:nth-last-of-type(2){
 		width: 317px;
 		height: 32px;
 	}
