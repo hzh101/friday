@@ -12,23 +12,26 @@
 			<div class="tlw-confirm">
 		    		<button @click="address()">确定</button>
 		    </div>
-		    <div class="tlw-location-success">
-		    		<strong>定位成功</strong>
-		    </div>
+		    <bullet :tanMsg='tanMsg'></bullet>
 		</div>
 	</div>
 </template>
 
 <script>
+	import bullet from 'components/user/bullet';
+	
 	export default {
+		data(){
+			return{
+				tanMsg:'定位成功'
+			}
+		},
+		components:{
+			bullet
+		},
 		methods:{
 			address(){
-				$(".tlw-location-success").fadeIn(500);
-				setTimeout(function(){
-					$(".tlw-location-success").hide();
-					$(".tlw-Current-City").hide();
-				},1000)
-				return false;
+				$(".bullet").fadeIn(500).delay(500).fadeOut();
 			},
 			hide(){
 				$(".tlw-Current-City").hide();
@@ -38,6 +41,12 @@
 	}
 </script>
 <style lang="less" scoped>
+	.bullet{
+		position: absolute;
+		top: 180px;
+		left: 300px;
+		display: none;
+	}
 	.tlw-city-bg{
 		width: 100%;
 		height: 100%;

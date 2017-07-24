@@ -6,8 +6,8 @@ var app = express();
 var router = express.Router();
 var userRouter = express.Router();
 
-//var bodyParser = require('body-parser')
-//var urlencodeParser = bodyParser.urlencoded();
+var bodyParser = require('body-parser')
+var urlencodeParser = bodyParser.urlencoded();
 //var devServer = require('./dev-server')
 //var app = devServer.app
 //var router = devServer.router;
@@ -39,9 +39,9 @@ var global = 'SELECT * FROM goods WHERE firstType="全球代购" LIMIT 0,4';
 var fruit = 'SELECT * FROM goods WHERE firstType="新鲜水果" LIMIT 0,4';
 
 //登录
-userRouter.get('/login',function (req,res) {
-	var phone = req.query.phone;
-	var passWord = req.passWord;
+userRouter.post('/login',urlencodeParser,function (req,res) {
+	var phone = req.body.phone;
+	var passWord = req.body.passWord;
 	var user = 'SELECT passWord FROM user WHERE phone='+phone;
 	link.query(user,function(err,result){
 		if (err) {
@@ -50,7 +50,11 @@ userRouter.get('/login',function (req,res) {
 			if (result.length==0) {
 				res.send("0");
 			}else{
-				console.log(result)
+             if(result[0].passWord == passWord){
+                 res.send('1');
+             }else {
+                 res.send("0")
+             }
 			}
 		}
 	})
