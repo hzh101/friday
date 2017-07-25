@@ -132,7 +132,7 @@
 					this.$http.post('/api/user/login',{phone:phone,passWord:pwd},{emulateJSON:true}).then(function(res){
 						var data = res.data;
 						if (data==1) {
-							_this.$emit()
+//							_this.$emit()
 							router.push('/home');
 						} else{
 							$(".bullet").fadeIn(500).delay(500).fadeOut();

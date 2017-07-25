@@ -5,8 +5,8 @@
 			<div class="tlw-personalData-cont">
 				<div class="tlw-myHeadPortrait">
 					<p>当前头像：</p>
-					<img src="../../images/17.png" />
-					<input type="file"/>
+					<img :src="'../../../static/upload/'+headImg" />
+					<input type="file" @change="onFileChange" multiple/>
 					<em>修改</em>
 				</div>
 				<div class="tlw-myNickname">
@@ -39,7 +39,24 @@
 
 <script>
 	export default {
+		data(){
+			return{
+				headImg:'123.png',
+				formData:{}
+			}
+		},
 		methods: {
+			onFileChange(ev){
+				this.formData = new FormData(); 
+				this.formData.append('file', ev.target.files[0]);
+				
+			},
+			submit(){
+				this.formData.append('phone',123)
+				this.$http.post('/api/user/file',this.formData).then(res => {
+					console.log(res.data)
+				})
+			},
 			creatYear() {
 				var year = "";
 				for(var i = 1949; i < 2018; i++) {
@@ -66,6 +83,10 @@
 			this.creatYear()
 			this.creatMonth()
 			this.creatDay()
+			
+//			this.$http.get('/api/user/file',{params:{id:1}}).then(res => {
+////				console.log(res.data)
+//			})
 		}
 	}
 </script>
