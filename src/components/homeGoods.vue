@@ -95,7 +95,7 @@
 .tlw-fruits .tlw-fresh-fruits {
 	height: 100px;
 	background: #ebffe8;
-	border-bottom: 1px solid;
+	border-bottom: 1px solid green;
 	padding: 0 30px;
 	display: flex;
 	flex-direction: row;

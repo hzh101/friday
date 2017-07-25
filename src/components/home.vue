@@ -18,38 +18,38 @@
 		<!--新品和热卖-->
 		<div class='tlw-homeGoods'>
 			<ul class="tlw-hot-sale">
-				<li>
-					<img src="../images/1.png" />
-					<img src="../images/3.png" />
+				<router-link to="/nofind" tag="li">
+					<img src="../../static/imgs/testImage/tu-green.png" />
+					<img src="../../static/imgs/testImage/sale2.png" />
 					<div class="tlw-sale-p">
 						<p>内蒙古草原</p>
 						<p>羔羊羊精肉</p>
 					</div>
-				</li>
-				<li>
-					<img src="../images/1.png" />
-					<img src="../images/3.png" />
+				</router-link>
+				<router-link to="/nofind" tag="li">
+					<img src="../../static/imgs/testImage/tu-orange.png" />
+					<img src="../../static/imgs/testImage/sale1.png" />
+					<div class="tlw-sale-p">
+						<p>新西兰柠檬</p>
+						<p>鲜橙靓皮 柠香清新</p>
+					</div>
+				</router-link>
+				<router-link to="/nofind" tag="li">
+					<img src="../../static/imgs/testImage/tu-green.png" />
+					<img src="../../static/imgs/testImage/sale2.png" />
 					<div class="tlw-sale-p">
 						<p>内蒙古草原</p>
 						<p>羔羊羊精肉</p>
 					</div>
-				</li>
-				<li>
-					<img src="../images/1.png" />
-					<img src="../images/3.png" />
+				</router-link>
+				<router-link to="/nofind" tag="li">
+					<img src="../../static/imgs/testImage/tu-orange.png" />
+					<img src="../../static/imgs/testImage/sale1.png" />
 					<div class="tlw-sale-p">
-						<p>内蒙古草原</p>
-						<p>羔羊羊精肉</p>
+						<p>新鲜草莓</p>
+						<p>留住新鲜</p>
 					</div>
-				</li>
-				<li>
-					<img src="../images/1.png" />
-					<img src="../images/3.png" />
-					<div class="tlw-sale-p">
-						<p>内蒙古草原</p>
-						<p>羔羊羊精肉</p>
-					</div>
-				</li>
+				</router-link>
 			</ul>
 			<home-goods></home-goods>
 		</div>
@@ -85,14 +85,10 @@
 				$(".swiper-button-next").on("mouseout", function() {
 					$(".icon-arrow-circle-o-right").css("color", "rgba(241,131,2,0.4)");
 				});
-				//新品和热卖
-				$(".tlw-hot-sale li").on("click", function() {
-					window.location.href = "404.html";
-				});
 				
 				//倒计时
 				function getRTime() {
-					var EndTime = new Date('2017/07/26 10:00:00');
+					var EndTime = new Date('2017/07/30 10:00:00');
 					var NowTime = new Date();
 					var t = EndTime.getTime() - NowTime.getTime();
 					var d = Math.floor(t / 1000 / 60 / 60 / 24);
@@ -110,7 +106,7 @@
 	}
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 	/*轮播图*/
 .tlw-homeGoods{
 	width: 1280px;
@@ -185,13 +181,29 @@
 .tlw-hot-sale li {
 	width: 305px;
 	height: 140px;
-	background: url(../images/2.png);
+	background: url(../../static/imgs/testImage/picture4.png);
 	background-size: 100% 100%;
 	margin: 20px 0;
 	cursor: pointer;
 	position: relative;
 }
-
+.tlw-hot-sale li:nth-of-type(2){
+	background: url(../../static/imgs/testImage/picture3.png);
+	p:nth-of-type(2){
+		font-size: 16px;
+		font-weight: 100;
+	}
+}
+.tlw-hot-sale li:nth-of-type(3){
+	background: url(../../static/imgs/testImage/picture2.png);
+}
+.tlw-hot-sale li:nth-of-type(4){
+	background: url(../../static/imgs/testImage/picture1.png);
+	p:nth-of-type(2){
+		font-size: 16px;
+		font-weight: 100;
+	}
+}
 .tlw-hot-sale li img:nth-of-type(2) {
 	width: 30px;
 	position: absolute;
