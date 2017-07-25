@@ -36,7 +36,7 @@
 				var height = $(document).scrollTop();
 				if(height>170){
 					$(".nav-second-lyc").addClass("nav-second-tlw");
-					$(".nav-second-tlw").css({"width:1280px","height: 100px",})
+					$(".nav-second-tlw").css({"width":"1280px","height": "100px"})
 				}else{
 					
 				}

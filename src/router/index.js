@@ -13,6 +13,8 @@ import footNavThree from 'components/footNavThree';
 import footNavFour from 'components/footNavFour';
 import footNavFive from 'components/footNavFive';
 import goodsDetail from 'components/goodsDetail';
+import product from 'components/productDetails';
+import nofind from 'components/nofind';
 
 import allGoods from 'components/allGoods';
 import moreGoods from 'components/moreGoods';
@@ -35,7 +37,6 @@ import feedback from 'components/user/feedback';
 //购物车
 import shoppCar from 'components/shoppCar/shoppCar';
 
-
 import typeRoute from '../data/typeRoute.json';
 
 var childRoute = [];
@@ -46,16 +47,17 @@ for (var i = 0; i < typeRoute.route.length; i++) {
 	}
 }
 
-//console.log(childRoute)
+
 
 Vue.use(Router)
 
 const router = new Router({
 	mode:'history',
 	routes: [
-
 		{path: '/',redirect: '/login'},
 		{path: '/login',component: login},
+		{path: '/nofind',component: nofind},
+		
 		{
 			path: '/index',component: index,
 			children:[
@@ -68,6 +70,7 @@ const router = new Router({
 				{path: '/local',component: local},
 				{path: '/friday',component: friday},
 				{path: '/integral',component: integral},
+				{path: '/product',component: product},
 				{
 					path: '/user',component: user,
 					children:[
@@ -101,6 +104,7 @@ const router = new Router({
 		},    
 	]
 });
+
 
 
 

@@ -4,7 +4,6 @@
 	<keep-alive>
 		<router-view></router-view>
 	</keep-alive>
->>>>>>> 97dd612336f714b238f3a738f12b1dcb166f0897
 	</div>
 </template>
 

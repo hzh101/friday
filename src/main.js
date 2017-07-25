@@ -12,21 +12,12 @@ require("static/css/reset.css");
 require("static/js/swiper.jquery.min.js");
 require("static/js/swiper.min.js");
 
-
-
-
-
-
 Vue.use(VueResource)
 Vue.config.productionTip = false
-
-
 
 new Vue({
   el: '#app',
 	router,
   template: '<App/>',
   components: { App },
-	
-  
 })

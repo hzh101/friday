@@ -20,12 +20,6 @@
 	
 	
 export default {
-	data(){
-		return{
-			
-		}
-	},
-name: 'app',
   components:{
   		topNav,
 		heads,

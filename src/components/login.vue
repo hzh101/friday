@@ -234,6 +234,8 @@
 			$('#zh-login').click(function () {
   				$('.tlw-box-zhuce').css('display','none');
   				$('.zh-warn').css('opacity',0);
+  				$(".tlw-box-login").show();
+				$(".tlw-box-resetPasswords").hide();
 	  		});
 	  		$('#zh-reg').click(function () {
 	  			$('.tlw-box-zhuce').css('display','block');

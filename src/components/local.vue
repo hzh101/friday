@@ -10,8 +10,8 @@
 			<!--全部的服务类型详情-->
 			<div class="tlw-all">
 				<ul>
-					<router-link :to="{path:'/detail',query:{title:item.title}}" v-for="(item,index) in service" tag='li'>
-						<img :src='"../images/tc"+(index+1)+".jpg"' />
+					<router-link :to="{path:'/product',query:{title:item.title}}" v-for="(item,index) in service" tag='li' key='index'>
+						<img :src='"../images/"+item.images+""' />
 						<h2>{{item.title}}</h2>
 						<div class="tlw-comment">
 							<img src="../images/10.png" />
