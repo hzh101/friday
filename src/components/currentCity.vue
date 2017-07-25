@@ -18,7 +18,7 @@
 </template>
 
 <script>
-	import bullet from 'components/user/bullet';
+	import bullet from 'components/bullet';
 	
 	export default {
 		data(){
