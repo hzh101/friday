@@ -17,13 +17,13 @@ var mysql = require("mysql");
 
 var link = mysql.createConnection({
     host:"10.90.85.229",
-    user:"root",
-    password:"",
-    database:"friday"
+	host: "10.90.85.229",
+	user: "root",
+	password: "",
+	database: "friday"
 });
 //链接数据库
 link.connect();
-
 
 //查询语句
 var all = 'SELECT * FROM goods';
@@ -39,131 +39,153 @@ var global = 'SELECT * FROM goods WHERE firstType="全球代购" LIMIT 0,4';
 var fruit = 'SELECT * FROM goods WHERE firstType="新鲜水果" LIMIT 0,4';
 
 //登录
-userRouter.post('/login',urlencodeParser,function (req,res) {
+userRouter.post('/login', urlencodeParser, function(req, res) {
 	var phone = req.body.phone;
 	var passWord = req.body.passWord;
-	var user = 'SELECT passWord FROM user WHERE phone='+phone;
-	link.query(user,function(err,result){
-		if (err) {
+	var user = 'SELECT passWord FROM user WHERE phone=' + phone;
+	link.query(user, function(err, result) {
+		if(err) {
 			console.log(err)
-		} else{
-			if (result.length==0) {
+		} else {
+			if(result.length == 0) {
 				res.send("0");
-			}else{
-             if(result[0].passWord == passWord){
-                 res.send('1');
-             }else {
-                 res.send("0")
-             }
+			} else {
+				if(result[0].passWord == passWord) {
+					res.send('1');
+				} else {
+					res.send("0")
+				}
 			}
 		}
 	})
 })
 
 //进入页面的展示数据的接口
-router.get('',function (req,res) {
-    var data =[];
-    
-    link.query(greens,function (err, result) {
-        if (!err){
-            data.push({title:'田园蔬菜',count: result});
-        }
-    });
-    link.query(meat,function (err, result) {
-        if (!err){
-            data.push({title:'肉食家禽',count: result});
-        }
-    });
-    link.query(fish,function (err, result) {
-        if (!err){
-            data.push({title:'海鲜水产',count: result});
-        }
-    });
-    link.query(goodFood,function (err, result) {
-        if (!err){
-            data.push({title:'优选食材',count: result});
-        }
-    });
-    link.query(wine,function (err, result) {
-        if (!err){
-            data.push({title:'零食酒水',count: result});
-        }
-    });
-    link.query(fastFood,function (err, result) {
-        if (!err){
-            data.push({title:'蛋奶速食',count: result});
-        }
-    });
-    link.query(fruit,function (err, result) {
-        if (!err){
-            data.push({title:'新鲜水果',count: result});
-        }
-    });
-    link.query(global,function (err, result) {
-        if (!err){
-            data.push({title:'全球代购',count: result});
-        }
-    });
-    link.query(friday,function (err, result) {
-        if (!err){
-	        	res.send({friday:result,type:data})
-        }
-    });
+router.get('', function(req, res) {
+	var data = [];
+
+	link.query(greens, function(err, result) {
+		if(!err) {
+			data.push({
+				title: '田园蔬菜',
+				count: result
+			});
+		}
+	});
+	link.query(meat, function(err, result) {
+		if(!err) {
+			data.push({
+				title: '肉食家禽',
+				count: result
+			});
+		}
+	});
+	link.query(fish, function(err, result) {
+		if(!err) {
+			data.push({
+				title: '海鲜水产',
+				count: result
+			});
+		}
+	});
+	link.query(goodFood, function(err, result) {
+		if(!err) {
+			data.push({
+				title: '优选食材',
+				count: result
+			});
+		}
+	});
+	link.query(wine, function(err, result) {
+		if(!err) {
+			data.push({
+				title: '零食酒水',
+				count: result
+			});
+		}
+	});
+	link.query(fastFood, function(err, result) {
+		if(!err) {
+			data.push({
+				title: '蛋奶速食',
+				count: result
+			});
+		}
+	});
+	link.query(fruit, function(err, result) {
+		if(!err) {
+			data.push({
+				title: '新鲜水果',
+				count: result
+			});
+		}
+	});
+	link.query(global, function(err, result) {
+		if(!err) {
+			data.push({
+				title: '全球代购',
+				count: result
+			});
+		}
+	});
+	link.query(friday, function(err, result) {
+		if(!err) {
+			res.send({
+				friday: result,
+				type: data
+			})
+		}
+	});
 });
 //详情页 展示
-router.get('/detail',function (req,res) {
-    var id = req.query.id;
-    var querysql = 'SELECT * FROM goods WHERE id='+id;
-    link.query(querysql,function (err,result) {
-        if(!err){
-            res.send(result);
-        }
-    })
+router.get('/detail', function(req, res) {
+	var id = req.query.id;
+	var querysql = 'SELECT * FROM goods WHERE id=' + id;
+	link.query(querysql, function(err, result) {
+		if(!err) {
+			res.send(result);
+		}
+	})
 });
 //首页点击 更多 的几口
-router.get('/more',function (req,res) {
+router.get('/more', function(req, res) {
 	var firstType = req.query.firstType;
 	var secondType = req.query.secondType;
-	if (!secondType) {
-		if (firstType ==='全部') {
-			link.query(all,function (err, result) {
-		        if (!err){
-		        		res.send(result);
-		        }
-		    });
-		} else{
-			var firstSql = 'SELECT * FROM goods WHERE firstType="'+firstType+'"';
-			link.query(firstSql,function (err, result) {
-		        if (!err){
-		        		res.send(result);
-		        }
-		    });
+	if(!secondType) {
+		if(firstType === '全部') {
+			link.query(all, function(err, result) {
+				if(!err) {
+					res.send(result);
+				}
+			});
+		} else {
+			var firstSql = 'SELECT * FROM goods WHERE firstType="' + firstType + '"';
+			link.query(firstSql, function(err, result) {
+				if(!err) {
+					res.send(result);
+				}
+			});
 		}
-	} else{
+	} else {
 		var secondSql = 'SELECT * FROM goods WHERE firstType="' + firstType + '"AND  secondType="' + secondType + '"';
-		link.query(secondSql,function (err, result) {
-	        if (!err){
-	        		res.send(result);
-	        }
-	    });
+		link.query(secondSql, function(err, result) {
+			if(!err) {
+				res.send(result);
+			}
+		});
 	}
 });
 
-
-
-
-
 app.all('*', function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
-    res.header("X-Powered-By",' 3.2.1');
-    res.header("Content-Type", "application/json;charset=utf-8");
-    next();
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "X-Requested-With");
+	res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
+	res.header("X-Powered-By", ' 3.2.1');
+	res.header("Content-Type", "application/json;charset=utf-8");
+	next();
 });
 
-app.use('/user',userRouter);
-app.use('/goods',router);
+app.use('/user', userRouter);
+app.use('/goods', router);
 app.listen(8000);
 console.log('服务器创建成功')
-
