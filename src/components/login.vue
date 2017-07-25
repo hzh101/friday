@@ -97,6 +97,7 @@
 	import router from '../router';
 	
 	export default{
+		props:["message"],
 		data() {
 			return {
 				tanMsg:'用户名或密码不正确!',
@@ -132,8 +133,9 @@
 					this.$http.post('/api/user/login',{phone:phone,passWord:pwd},{emulateJSON:true}).then(function(res){
 						var data = res.data;
 						if (data==1) {
-							_this.$emit()
 							router.push('/home');
+							_this.$emit("logins","您好， "+phone);
+							_this.$emit("register","退出");
 						} else{
 							$(".bullet").fadeIn(500).delay(500).fadeOut();
 						}
@@ -322,7 +324,6 @@
 		border: 1px solid #cccccc;
 		text-indent: 8px;
 	}
-	
 	.tlw-register .tlw-register-box .tlw-box .tlw-box-inpts input:nth-of-type(3) {
 		display: block;
 		width: 130px;
