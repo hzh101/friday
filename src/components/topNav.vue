@@ -10,11 +10,11 @@
 				</div>
 				<ul class="first-content-right-lyc">
 					<router-link to="/login" tag='li' >
-						<span id="zh-login">登录</span>
+						<span id="zh-login">{{message.log}}</span>
 						<strong id="zh-phone"></strong>
 					|</router-link>
 					<li>
-						<span id="zh-reg">注册</span>
+						<span id="zh-reg">{{message.reg}}</span>
 					|</li>
 					<router-link to="/user/myOrder" tag='li'>
 						<span>我的订单</span>
@@ -36,12 +36,8 @@
 <script>
 	import currentCity from 'components/currentCity';
 	export default{
+		props:["message"],
 		components:{ currentCity },
-	    data(){
-	    		return{
-	    			
-	    		}
-	    },
 	    mounted(){
 	    		$('#city').click(function () {
 	    			$('#cover').toggle()

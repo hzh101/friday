@@ -55,7 +55,7 @@
 				this.formData.append('phone',123)
 				this.$http.post('/api/user/file',this.formData).then(res => {
 					console.log(res.data)
-				})
+				});
 			},
 			creatYear() {
 				var year = "";
