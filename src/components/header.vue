@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="nav-top-lyc">
 		<!--header-->
 		<div class="nav-second-lyc">
 			<a href=""><h1><img src="../img/1.png"/></h1></a>	
@@ -34,11 +34,12 @@
 		created(){
 			$(window).scroll(function(){
 				var height = $(document).scrollTop();
-				if(height>170){
+				if(height > 170){
 					$(".nav-second-lyc").addClass("nav-second-tlw");
-					$(".nav-second-tlw").css({"width:1280px","height: 100px",})
+					$(".nav-top-lyc").addClass("nav-top-tlw");
 				}else{
-					
+					$(".nav-second-lyc").removeClass("nav-second-tlw");
+					$(".nav-top-lyc").removeClass("nav-top-tlw");
 				}
 			})
 		}
@@ -46,9 +47,15 @@
 </script>
 
 <style scoped>
-/*.nav-second-tlw {
-	background: greenyellow;
-}*/
+.nav-top-tlw {
+	width: 100%;
+	height: 105px;
+	background: #fff;
+	border-bottom: 1px solid #ddd;
+	position: fixed;
+	top: 0;
+	z-index: 100;
+}
 .nav-second-lyc {
 	width: 1280px;
 	height: 69px;
@@ -56,6 +63,16 @@
 	margin-top: 25px;
 	position: relative;
 	margin-bottom: 50px;
+}
+.nav-second-tlw {
+	width: 1280px;
+	height: 69px;
+	/*background: greenyellow;*/
+	position: fixed;
+	left: 50%;
+	margin-left: -640px;
+	top: -22px;
+	z-index: 99;
 }
 .nav-second-lyc a h1 {
 	display: inline-block;
