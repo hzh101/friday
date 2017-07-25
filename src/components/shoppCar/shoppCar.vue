@@ -3,7 +3,7 @@
 		<h2><span>&nbsp;</span>购物车</h2>
 		<table>
 			<tr>
-				<th><input  @click="headAll()" type="checkbox"/></th>
+				<th><input  @click="checkAll()" type="checkbox" :checked="checkAllFlag"/></th>
 				<th>礼拜五生鲜</th>
 				<th>规格</th>
 				<th>数量</th>
@@ -12,17 +12,17 @@
 				<th>操作</th>
 			</tr>
 			<tr v-for="(item,index) in data">
-				<td><input type="checkbox"/></td>
+				<td><input type="checkbox" :checked="item.checkFlag" @click="check(item)"/></td>
 				<td>
 					<img :src='"static/imgs/"+item.img'/>
 					<strong>{{item.title}}</strong>
 				</td>
 				<td>无</td>
 				<td>
-					<span @click="sub(index)">-</span><input type="text" v-model="item.count"/><span @click="add(index)">+</span>
+					<a href="javascript:;" @click="changeCount(index,-1)">-</a><input type="text" v-model="item.count"/><a href="javascript:;" @click="changeCount(index,1)">+</a>
 				</td>
 				<td>¥{{item.price}}</td>
-				<td>¥{{item.count*item.price}}</td>
+				<td>¥{{item.price*item.count}}</td>
 				<td><button @click="del(index)" class="delete">删除</button></td>
 			</tr>
 			<tr class="foot">
@@ -30,25 +30,28 @@
 					<div class="total">
 						<strong>商品金额</strong>
 						<span>¥</span>
-						<span>0.00</span>
+						<span>{{total}}</span>
 					</div>
 				</td>
 			</tr>
 		</table>
 		<div class="footHandle">
-			<button @click="allCheck">全选</button>
-			<button>批量删除</button>
+			<button @click="checkAll()">全选</button>
+			<button @click="delCount()">批量删除</button>
 			<button class="buy">立即购买</button>
 			<div class="total">
 				<strong>商品金额</strong>
 				<span>¥</span>
-				<span>0.00</span>
+				<span>{{total}}</span>
 			</div>
 		</div>
+		<bullet :tanMsg='tanMsg'></bullet>
 	</div>
 </template>
 
 <script>
+	import bullet from 'components/bullet';
+	
 	export default {
 		data(){
 			return{
@@ -56,38 +59,78 @@
 					{img:"fish-a1.png",title:'橙汁',count:1,price:2},
 					{img:"fish-b1.png",title:'橙汁47979',count:3,price:3},
 					{img:"fish-c1.png",title:'橙汁2344',count:2,price:2}
-				]
+				],
+				checkAllFlag:false,
+				total:0,
+				tanMsg:'删除成功'
 			}
 		},
+		components:{
+			bullet
+		},
 		methods:{
-			sub(index){
-				this.data[index].count--;
-				if (this.data[index].count<=0) {
-					this.data[index].count = 0;
+			changeCount(index,flag){
+				if (flag>0) this.data[index].count++;
+				else {
+					this.data[index].count--;
+						if (this.data[index].count<1) {
+							this.data[index].count = 1;
+						}
 				}
-			},
-			add(index){
-				this.data[index].count++;
+				this.calcTotal();
 			},
 			del(index){
-				this.data.splice(index,1)
+				this.data.splice(index,1);
+				$(".bullet").fadeIn(500).delay(500).fadeOut();
 			},
-			headAll(){
-				if ($('.shopping-cart th input:checked').prop('checked')) {
-					$('.shopping-cart td input:checkbox').prop('checked',true);
+			checkAll(){
+				this.checkAllFlag = !this.checkAllFlag;
+				this.data.forEach((item,index) => {
+					if (typeof item.checkFlag == "undefined") {
+						this.$set(item,'checkFlag',this.checkAllFlag);
+					} else{
+						item.checkFlag = this.checkAllFlag;
+					}
+				});
+				this.calcTotal();
+			},
+			check(item){
+				if (typeof item.checkFlag == "undefined") {
+					this.$set(item,'checkFlag',true);
 				} else{
-					$('.shopping-cart td input:checkbox').prop('checked',false);
+					item.checkFlag = false;
 				}
+				this.calcTotal();
 			},
-			allCheck(){
-				$('.shopping-cart tr input:checkbox').prop('checked',true);
+			delCount(){
+				this.data.forEach((item,index) => {
+					if (item.checkFlag == true) {
+						this.data.splice(index,1);
+						$(".bullet").fadeIn(500).delay(500).fadeOut();
+					}
+				});
+			},
+			calcTotal(){
+				this.total = 0;
+				this.data.forEach((item,index) => {
+					if (item.checkFlag == true) {
+						this.total += item.price * item.count;
+					}
+				})
 			}
 		}
 	}
 </script>
 
 <style lang="less" scoped>
+	.bullet{
+		position: absolute;
+		top: 30%;
+		left: 50%;
+		display: none;
+	}
 	.shopping-cart{
+		position: relative;
 		width: 1280px;
 		margin: 0 auto;
 		h2{
@@ -147,7 +190,7 @@
 				}
 				th:nth-of-type(4),td:nth-of-type(4){
 					width: 192px;
-					span{
+					a{
 						display: inline-block;
 						width: 28px;
 						height: 28px;

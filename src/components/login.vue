@@ -87,15 +87,13 @@
 						<button @click="submit()" class="register-btn2">提交</button>
 					</div>
 				</div>
-				
-				
 			</div>
 		</div>
 	</div>
 </template>
 
 <script>
-	import bullet from 'components/user/bullet';
+	import bullet from 'components/bullet';
 	import router from '../router';
 	
 	export default{
@@ -116,7 +114,6 @@
 			reset(){
 				$(".tlw-box-login").hide();
 				$(".tlw-box-resetPasswords").show();
-				
 			},
 			change(){
 				var index = this.ranNum(0,8);
@@ -126,6 +123,7 @@
 				return Math.floor(Math.random()*(max-min+1)+min);
 			},
 			login(){
+				var _this = this;
 				$('.tlw-box-zhuce').css('display','none');
   				$('.zh-warn').css('opacity',0);
 				if ($('.input1').val() && $('.input2').val()) {
@@ -134,6 +132,7 @@
 					this.$http.post('/api/user/login',{phone:phone,passWord:pwd},{emulateJSON:true}).then(function(res){
 						var data = res.data;
 						if (data==1) {
+							_this.$emit()
 							router.push('/home');
 						} else{
 							$(".bullet").fadeIn(500).delay(500).fadeOut();
