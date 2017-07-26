@@ -3,7 +3,7 @@
 		<div class="nav-top-lyc">
 			<!--header-->
 			<div class="nav-second-lyc">
-				<a href=""><h1><img src="../img/1.png"/></h1></a>	
+				<a href="/home"><h1><img src="../img/1.png"/></h1></a>	
 				<input type="text" placeholder="请输入关键字进行搜索"/>
 				<button>搜</button>
 				<div class="nav-second-user-lyc">

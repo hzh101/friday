@@ -145,6 +145,7 @@
 			register(){
 				$('.tlw-box-zhuce').css('display','block');
 	  			$('.zh-warn').css('opacity',0);
+	  			
 			},
 			submit(){
 				var phone = $(".tlw-box-resetPasswords .input1").val();
