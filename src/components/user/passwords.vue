@@ -27,31 +27,7 @@
 </template>
 
 <script>
-	export default {
-//		data() {
-//			return {
-//			resPhone:"",
-//			resPasd1:"",
-//			resPasd2:""
-//		  },
-//		  methods: {
-//		  	passwords() {
-//		  		var _this = this;
-//		  		if($('.input1').val() && $('.input2') && $('.input3')) {
-//		  			var rphone = $('.input1').val();
-//		  			var rpwd1 = $('.input2').val();
-//		  			var rpwd2 = $('.input3').val();
-//		  			this.http.post('/api/user/login',{phone:rphone,passWord:rpwd1,passWord:rpwd2},{emulateJSON:true}).then(function(res){
-//		  				var data = res.data;
-//		  				if(data==1) {
-//		  					
-//		  				}
-//		  			})
-//		  		}
-//		  	}
-//		  }
-//		}
-	}
+	export default {}
 </script>
 
 <style lang="less" scoped>
