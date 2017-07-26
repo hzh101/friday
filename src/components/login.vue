@@ -154,6 +154,7 @@
 			register(){
 				$('.tlw-box-zhuce').css('display','block');
 	  			$('.zh-warn').css('opacity',0);
+	  			
 			},
 			reg(){
 				this.$http.post('/api/user/reg',{phone:this.regPhone,passWord:this.regPwd},{emulateJSON:true}).then(function(res){

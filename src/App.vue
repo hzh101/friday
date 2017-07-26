@@ -6,6 +6,7 @@
 			<router-view @logins="shows" @register="regs"></router-view>
 		</keep-alive>
 		<bottom-nav></bottom-nav>
+		<returns></returns>
 		<foot></foot>
 	</div>
 </template>
@@ -15,7 +16,7 @@
 	import heads from 'components/header';
 	import bottomNav from 'components/bottomNav';
 	import foot from 'components/footer';
-
+	import returns from 'components/returns';
 	import router from './router';
 
 	export default {
@@ -33,7 +34,8 @@
 			topNav,
 			heads,
 			bottomNav,
-			foot
+			foot,
+			returns
 		},
 		methods: {
 			shows: function(data) {
@@ -73,6 +75,8 @@
 	}
 </script>
 
+<style scoped> 
+</style>
 <style scoped>
 
 </style>

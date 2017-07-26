@@ -141,6 +141,4 @@ export default {
 	font-size: 18px;
 	color: #4b943d;
 }
-
-
 </style>

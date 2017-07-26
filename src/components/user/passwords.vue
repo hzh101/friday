@@ -5,13 +5,13 @@
 		</div>
 		<ul class="password-content-lyc">
 		 	<li>
-		 		<input  placeholder="请输入手机号码"/>
+		 		<input  v-model="resPhone" placeholder="请输入手机号码" class="input1"/>
 		 	</li>
 		 	<li>
-		 		<input  placeholder="请输入密码(6-20位号码字符)"/>
+		 		<input  v-model="resPasd1" placeholder="请输入密码(6-20位号码字符)" class="input2"/>
 		 	</li>
 		 	<li>
-		 		<input  placeholder="请再次输入密码确认"/>
+		 		<input  v-model="resPasd2" placeholder="请再次输入密码确认" class="input3"/>
 		 	</li>
 		 	<li>
 		 		<input  placeholder="验证码"/><span>&nbsp;</span><a href="###">看不清,换一张</a>
@@ -27,9 +27,7 @@
 </template>
 
 <script>
-	export default {
-		
-	}
+	export default {}
 </script>
 
 <style lang="less" scoped>
