@@ -5,13 +5,13 @@
 		</div>
 		<ul class="password-content-lyc">
 		 	<li>
-		 		<input  placeholder="请输入手机号码"/>
+		 		<input  v-model="resPhone" placeholder="请输入手机号码" class="input1"/>
 		 	</li>
 		 	<li>
-		 		<input  placeholder="请输入密码(6-20位号码字符)"/>
+		 		<input  v-model="resPasd1" placeholder="请输入密码(6-20位号码字符)" class="input2"/>
 		 	</li>
 		 	<li>
-		 		<input  placeholder="请再次输入密码确认"/>
+		 		<input  v-model="resPasd2" placeholder="请再次输入密码确认" class="input3"/>
 		 	</li>
 		 	<li>
 		 		<input  placeholder="验证码"/><span>&nbsp;</span><a href="###">看不清,换一张</a>
@@ -28,7 +28,29 @@
 
 <script>
 	export default {
-		
+//		data() {
+//			return {
+//			resPhone:"",
+//			resPasd1:"",
+//			resPasd2:""
+//		  },
+//		  methods: {
+//		  	passwords() {
+//		  		var _this = this;
+//		  		if($('.input1').val() && $('.input2') && $('.input3')) {
+//		  			var rphone = $('.input1').val();
+//		  			var rpwd1 = $('.input2').val();
+//		  			var rpwd2 = $('.input3').val();
+//		  			this.http.post('/api/user/login',{phone:rphone,passWord:rpwd1,passWord:rpwd2},{emulateJSON:true}).then(function(res){
+//		  				var data = res.data;
+//		  				if(data==1) {
+//		  					
+//		  				}
+//		  			})
+//		  		}
+//		  	}
+//		  }
+//		}
 	}
 </script>
 

@@ -20,11 +20,11 @@
 				</router-link>
 				<div class="nav-second-bottom-lyc">
 					<a href="javascript:void(0)">热门:</a>
-					<a href="">杂粮饭</a>
-					<a href="">辣椒酱</a>
-					<a href="">水果礼篮</a>
-					<a href="">擦玻璃</a>
-					<a href="">苹果</a>
+					<a href="javascript:void(0)">杂粮饭</a>
+					<a href="javascript:void(0)">辣椒酱</a>
+					<a href="javascript:void(0)">水果礼篮</a>
+					<a href="javascript:void(0)">擦玻璃</a>
+					<a href="javascript:void(0)">苹果</a>
 				</div>
 			</div>
 		</div>

@@ -80,6 +80,7 @@
 	float: left;
 	font-size: 14px;
 	margin-left: 10px;
+	cursor: pointer;
 }
 .first-content-right-lyc li span{margin: 0 5px;}
 .first-content-right-lyc li strong{color: #50943d;}
