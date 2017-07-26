@@ -51,7 +51,7 @@
 						</div>
 						<span>件</span>
 						<div class="right-count-button-lyc">
-							<button>加入购物车</button>
+							<button @click="addShopping(data.id)">加入购物车</button>
 							<button>立即购买</button>
 						</div>
 					</div>
@@ -159,6 +159,20 @@
 				this.bool = !this.bool;
 				$('.detail-product-nav-lyc a').removeClass('change');
 				$(ev.target).addClass('change');
+			},
+			addShopping(id){
+				var phone = getCookie('fridayUser');
+				var count = $('.input').val();
+				if (phone){
+					//flag 标记是加还是减 1 加 0 减
+					this.$http.get('/api/user/addShop',{params:{phone:phone,id:id,flag:1,count:count}}).then(function(res){
+						if (res.bodyText=='1') {
+							alert('添加成功');
+						}
+					});
+				}else{
+					alert("请先登录")
+				}
 			}
 		},
 		components: {

@@ -14,7 +14,7 @@
 				<router-link to='/shoppCar'>
 					<div class="nav-second-shoppingcar-lyc">
 						<img src="../img/6.png" alt="" />&nbsp;&nbsp;<a href="javascript:;"><span>购物车</span></a>
-						<em>0</em>
+						<em id="shopCarCount">0</em>
 						<img src="../img/dhk.png" alt="" />
 					</div>
 				</router-link>
@@ -32,6 +32,7 @@
 </template>
 
 <script>
+	import router from '../router';
 	export default{
 		created(){
 			$(window).scroll(function(){

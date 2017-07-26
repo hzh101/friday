@@ -1,36 +1,38 @@
 <template>
-	<div class="tlw-person-box">
-		<div class="tlw-addressManage">
-			<div class="tlw-address-top">
-				<h5>地址管理</h5>
-				<button>添加新地址</button>
+	<div>
+		<div class="tlw-person-box">
+			<div class="tlw-addressManage">
+				<div class="tlw-address-top">
+					<h5>地址管理</h5>
+					<router-link to='/user/addAddress' tag='button'>添加新地址</router-link>
+				</div>
+				<table>
+						<tr>
+							<th>收货人</th>
+							<th>所在区域</th>
+							<th>街道地址</th>
+							<th>联系电话</th>
+							<th>备注</th>
+							<th>操作</th>
+						</tr>
+						<tr>
+							<td>张强强</td>
+							<td>北京 北京市 朝阳区</td>
+							<td>朝阳奥运媒体村（北苑天畅园）C3-2506室</td>
+							<td>18331205623</td>
+							<td>家里的地址</td>
+							<td><span>设为默认地址</span>|<em>修改</em>|<em>删除</em></td>
+						</tr>
+						<tr>
+							<td>张强强</td>
+							<td>北京 北京市 朝阳区</td>
+							<td>朝阳奥运媒体村（北苑天畅园）C3-2506室</td>
+							<td>18331205623</td>
+							<td>家里的地址</td>
+							<td><span>设为默认地址</span>|<em>修改</em>|<em>删除</em></td>
+						</tr>
+					</table>
 			</div>
-			<table>
-					<tr>
-						<th>收货人</th>
-						<th>所在区域</th>
-						<th>街道地址</th>
-						<th>联系电话</th>
-						<th>备注</th>
-						<th>操作</th>
-					</tr>
-					<tr>
-						<td>张强强</td>
-						<td>北京 北京市 朝阳区</td>
-						<td>朝阳奥运媒体村（北苑天畅园）C3-2506室</td>
-						<td>18331205623</td>
-						<td>家里的地址</td>
-						<td><span>设为默认地址</span>|<em>修改</em>|<em>删除</em></td>
-					</tr>
-					<tr>
-						<td>张强强</td>
-						<td>北京 北京市 朝阳区</td>
-						<td>朝阳奥运媒体村（北苑天畅园）C3-2506室</td>
-						<td>18331205623</td>
-						<td>家里的地址</td>
-						<td><span>设为默认地址</span>|<em>修改</em>|<em>删除</em></td>
-					</tr>
-				</table>
 		</div>
 	</div>
 </template>

@@ -19,7 +19,7 @@ var fs = require('fs');
 var mysql = require("mysql");
 
 var link = mysql.createConnection({
-    host:"10.90.85.229",
+	host: "10.90.85.229",
 	host: "10.90.85.229",
 	user: "root",
 	password: "",
@@ -62,46 +62,221 @@ userRouter.post('/login', urlencodeParser, function(req, res) {
 		}
 	})
 });
+userRouter.post('/reg', urlencodeParser, function(req, res) {
+	var phone = req.body.phone;
+	var passWord = req.body.passWord;
+	var user = 'SELECT * FROM user WHERE phone=' + phone;
+	link.query(user, function(err, result) {
+		if(err) {
+			console.log(err)
+		} else {
+			if(result.length == 0) {
+				var regQuery = "INSERT INTO user(phone,userName,passWord,sex,birthday,integral,wallet,headImg,shopCar,browse,collect,address) VALUES(" + phone + ",'nomsg','" + passWord + "',0,'nomsg',0,'nomsg','default.png','nomsg','nomsg','nomsg','nomsg')";
+				link.query(regQuery, function(err, result) {
+					if(err) {
+						console.log(err);
+					} else {
+						var data = {
+							err: 1,
+							data: {
+								phone: phone,
+								passWord: passWord
+							}
+						};
+						res.send(data)
+					}
+				});
+			}
+		}
+	})
+});
+//购物车
+userRouter.get('/cart', (req, res) => {
+	var phone = req.query.phone;
+	var shopCarQuery = 'SELECT shopCar FROM user WHERE phone=' + phone;
+	link.query(shopCarQuery, (err, result) => {
+		if(!err) {
+			var shopCar = result[0].shopCar;
+			if(shopCar == 'nomsg') {
+				res.send('nomsg')
+			} else {
+				var data = {
+					goods: [],
+					count: []
+				}
+				var arr3 = [];
+				var arr = shopCar.split(',');
+				for(var i = 0; i < arr.length; i++) {
+					var arr1 = arr[i].split('/');
+					data.count.push(arr1[1]);
+					var user = 'SELECT * FROM goods WHERE id=' + arr1[0];
+					link.query(user, function(err, result) {
+						if(!err) {
+							arr3.push(result[0])
+							if(arr3.length == i) {
+								data.goods = arr3;
+								res.send(data)
+							}
+						}
+					});
+				}
+			}
+		}
+	});
+});
+
+userRouter.get('/addShop', (req, res) => {
+	var phone = req.query.phone;
+	var goodsID = req.query.id;
+	var flag = Number(req.query.flag);
+	var count = Number(req.query.count);
+	if (!flag) {
+		count = -1;
+	} 
+	var user = 'SELECT shopCar FROM user WHERE phone=' + phone;
+	link.query(user, function(err, result) {
+		var shopCar = result[0].shopCar;
+		if(!err) {
+			if(shopCar == 'nomsg') {
+				var newShopCar = goodsID + "/" + count;
+			} else {
+				var newShopCar = itemStr(shopCar,goodsID,count);
+			}
+			var updateShopCar = "UPDATE user SET shopCar='" + newShopCar + "' WHERE phone=" + phone;
+			link.query(updateShopCar, function(err, result) {
+				if(!err) {
+					res.send('1');
+				}
+			});
+		}
+	});
+});
+
+function itemStr(shopCar,goodsID,count) {
+	var str = ''
+	var arr3 = [];
+	var arr = shopCar.split(',');
+	var act = true;
+	for(var i = 0; i < arr.length; i++) {
+		var arr1 = arr[i].split('/');
+		if(arr1[0] == goodsID) {
+			var num = Number(arr1[1])
+			num +=count;
+			arr1[1] = num;
+			act = false
+		}
+		str = arr1.join('/');
+		arr3.push(str);
+	}
+	if (act) {
+		var str1 = goodsID + '/' + count;
+		arr3.push(str1);
+	}
+	var newStr = arr3.join(',');
+	return newStr;
+}
+
+userRouter.get('/delShop',function (req,res) {
+	var goodsID = req.query.id;
+	var phone = req.query.phone;
+	var delID = 'SELECT shopCar FROM user WHERE phone=' + phone;
+	link.query(delID,function (err,result) {
+		var shopCar = result[0].shopCar;
+		var arr = shopCar.split(',');
+		for (var i = 0; i < arr.length; i++) {
+			var arr1 = arr[i].split('/');
+			if (arr1[0]==goodsID) {
+				arr.splice(i,1);
+			}
+		}
+		if(arr.length==0){
+			var newShopCar = 'nomsg';
+		}else{
+			var newShopCar = arr.join(',');
+		}
+		
+		var updateShopCar = "UPDATE user SET shopCar='" + newShopCar + "' WHERE phone=" + phone;
+		link.query(updateShopCar, function(err, result) {
+			if(!err) {
+				console.log(3333)
+				res.send('1');
+			}
+		});
+	});
+});
+
+userRouter.get('/shopCarCount', (req,res) => {
+	var phone = req.query.phone;
+	var queryCount = 'SELECT shopCar FROM user WHERE phone=' + phone;
+	link.query(queryCount, function(err, result) {
+		if(!err) {
+			var num = 0;
+			var shopCar = result[0].shopCar;
+			if (shopCar == 'nomsg') {
+				num = 0;
+			}else{
+				var arr = shopCar.split(",");
+				for (var i = 0; i < arr.length; i++) {
+					var arr1 = arr[i].split('/');
+					num += Number(arr1[1])
+				}
+			}
+			res.send(num+"");
+		}
+	});
+});
+
+//个人中心
+userRouter.get("/myAccount",(req,res) => {
+	var phone = req.query.phone;
+	var user = 'SELECT * FROM user WHERE phone=' + phone;
+	link.query(user,function (err,result) {
+		res.send(result);
+	})
+});
+
+
 var num = 0
-userRouter.post('/file',(req,res) => {
-    var form = new formidable.IncomingForm();
-    form.parse(req,function (err,field,files) {
-	    	num++;
-	    	var phone = field.phone;
-    		var imgUrl = phone + '-'+num+'.png';
-    		var nickname = field.nickname;
-    		var sex = field.sex;
-    		var birthday = field.year+"/"+field.month+"/"+field.day;
-    		var newPhone = field.newPhone;
-    		console.log(birthday);
-    		var str = 'headImg="'+imgUrl+'",userName="'+nickname+'",sex="'+sex+'",birthday="'+birthday +'"';
-    		var user = "UPDATE user SET "+str+" WHERE phone="+phone;
-    		var oldImgUrl = phone + '-'+(num-1)+'.png'; 
-        fs.unlink("../static/upload/"+oldImgUrl,function (err) {
-		    if(!err) console.log("删除成功");
+userRouter.post('/file', (req, res) => {
+	var form = new formidable.IncomingForm();
+	form.parse(req, function(err, field, files) {
+		num++;
+		var phone = field.phone;
+		var imgUrl = phone + '-' + num + '.png';
+		var nickname = field.nickname;
+		var sex = field.sex;
+		var birthday = field.year + "/" + field.month + "/" + field.day;
+		var newPhone = field.newPhone;
+//		console.log(birthday);
+		var str = 'headImg="' + imgUrl + '",userName="' + nickname + '",sex="' + sex + '",birthday="' + birthday + '"';
+		var user = "UPDATE user SET " + str + " WHERE phone=" + phone;
+//		console.log(user)
+		var oldImgUrl = phone + '-' + (num - 1) + '.png';
+		fs.unlink("../static/upload/" + oldImgUrl, function(err) {
+			if(!err) console.log("删除成功");
 		});
 		//创建可读流
-        var rs = fs.createReadStream(files.file.path);
-        // 创建可写流
-        var ws = fs.createWriteStream("../static/upload/"+imgUrl);
-        rs.pipe(ws);
-        link.query(user, function(err, result) {
+		var rs = fs.createReadStream(files.file.path);
+		// 创建可写流
+		var ws = fs.createWriteStream("../static/upload/" + imgUrl);
+		rs.pipe(ws);
+		link.query(user, function(err, result) {
 			if(!err) {
 				res.send(imgUrl)
-			}else{
+			} else {
 				console.log(err)
 			}
 		});
-    })
+	})
 });
-userRouter.get('/personMsg',(req,res) => {
+userRouter.get('/personMsg', (req, res) => {
 	var phone = req.query.phone;
 	var user = 'SELECT headImg FROM user WHERE phone=' + phone;
 	link.query(user, function(err, result) {
 		if(!err) {
-			if(result[0].headImg=='nomsg'){
+			if(result[0].headImg == 'nomsg') {
 				res.send("default.png");
-			}else{
+			} else {
 				res.send(result[0].headImg);
 			}
 		}

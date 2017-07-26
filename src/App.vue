@@ -47,18 +47,22 @@
 				return v ? v[2] : null;
 			}
 		},
-		created() {
+		mounted() {
 			var phone = this.getCookie('fridayUser');
 			if(phone) {
-				this.message = {
+				this.strings = {
 					log: {
 						title: "你好,",
 						phone: phone
 					},
 					reg: "退出"
 				}
+				this.$http.get('/api/user/shopCarCount',{params:{phone:phone}})	.then((res) => {
+					var num = res.bodyText;
+					$('#shopCarCount').text(num)
+				});
 			} else {
-				this.message = {
+				this.strings = {
 					log: {
 						title: "登录"
 					},
@@ -66,7 +70,6 @@
 				}
 			}
 		}
-
 	}
 </script>
 

@@ -8,7 +8,7 @@
 						<h3>{{item.name}}</h3>
 					</router-link>
 					<p>￥{{item.price}}<strong>￥{{item.oldPrice}}</strong></p>
-					<img class="tlw-shoppingCar" src="../images/8.png" />
+					<img class="tlw-shoppingCar" src="../images/8.png" @click="addShopping(item.id)"/>
 				</li>
 			</ul>
 			<div class="zh-nogoods" v-show="showGoods[0].name?false:true">
@@ -72,6 +72,19 @@
 					}
 				}
 				return pag;
+			},
+			addShopping(id){
+				var phone = getCookie('fridayUser');
+				if (phone){
+					//flag 标记是加还是减 1 加 0 减
+					this.$http.get('/api/user/addShop',{params:{phone:phone,id:id,flag:1,count:1}}).then(function(res){
+						if (res.bodyText=='1') {
+							alert('添加成功');
+						}
+					});
+				}else{
+					alert("请先登录")
+				}
 			}
 		}
 	}

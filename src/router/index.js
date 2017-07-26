@@ -33,6 +33,7 @@ import recently from 'components/user/recently';
 import passwords from 'components/user/passwords';
 import message from 'components/user/message';
 import feedback from 'components/user/feedback';
+import addAddress from 'components/user/addAddress';
 
 //购物车
 import shoppCar from 'components/shoppCar/shoppCar';
@@ -89,7 +90,8 @@ const router = new Router({
 						{path: '/user/passwords',component:passwords},
 						//站内信
 						{path: '/user/message',component:message},
-						{path: '/user/feedback',component:feedback}
+						{path: '/user/feedback',component:feedback},
+						{path: '/user/addAddress',component:addAddress}
 					]
 				},
 				//购物车

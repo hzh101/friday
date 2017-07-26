@@ -43,7 +43,7 @@
 					</router-link>
 					<p>￥{{val.price}}<strong>￥{{val.oldPrice}}</strong></p>
 					<!--购物车-->
-					<a href=""><img class="tlw-shoppingCar" src="../img/8.png" /></a>
+					<img @click="addShopping(val.id)" class="tlw-shoppingCar" src="../images/8.png" />
 				</li>
 			</ul>
 		</div>
@@ -65,7 +65,7 @@
 					{kind:'零食酒水',items:['零食','特色干果','休闲冲饮','茶叶','白酒','啤酒','葡萄酒','其他酒品']},
 					{kind:'蛋奶速食',items:['方便速食','奶制品','面包甜点','蛋品']},
 					{kind:'全球代购',items:['保健品','洗护用品','农副产品','母婴用品']}
-				]
+				],
 			}
 		},
 		created(){
@@ -75,6 +75,21 @@
 //				console.log(this.friday)
 //				console.log(this.allType)
 			});
+		},
+		methods:{
+			addShopping(id){
+				var phone = getCookie('fridayUser');
+				if (phone){
+					//flag 标记是加还是减 1 加 0 减
+					this.$http.get('/api/user/addShop',{params:{phone:phone,id:id,flag:1,count:1}}).then(function(res){
+						if (res.bodyText=='1') {
+							alert('添加成功');
+						}
+					});
+				}else{
+					alert("请先登录")
+				}
+			}
 		}
 	}
 </script>

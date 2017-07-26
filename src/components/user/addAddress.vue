@@ -1,6 +1,6 @@
 <template>
-	<div class="tlw-person-box">
-		<div class="tlw-add-newAddress">
+	<div class="tlw-person-box1">
+		<div class="tlw-add-newAddress1">
 			<h5>添加新地址</h5>
 			<div class="tlw-address-message">
 				<div class="tlw-new-address">
@@ -74,13 +74,15 @@
 					}
 				}
 			}
+		},
+		mounted(){
+			_init_area();
 		}
 	}
 </script>
 <style lang="less" scoped>
-	@import url("../../static/css/animate.css");
-	.tlw-person-box {
-		.tlw-add-newAddress {
+	.tlw-person-box1 {
+		.tlw-add-newAddress1 {
 			width: 1083px;
 			height: 618px;
 			border: 1px solid #CCCCCC;

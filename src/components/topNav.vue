@@ -14,7 +14,7 @@
 						<strong id="zh-phone">{{message.log.phone}}</strong>
 					|</router-link>
 					<li>
-						<span id="zh-reg">{{message.reg}}</span>
+						<span id="zh-reg" @click="logOut()">{{message.reg}}</span>
 					|</li>
 					<router-link to="/user/myOrder" tag='li'>
 						<span>我的订单</span>
@@ -35,16 +35,37 @@
 
 <script>
 	import currentCity from 'components/currentCity';
+	import router from '../router';
+	
 	export default{
 		props:["message"],
 		components:{ currentCity },
-		methods:{
-			
-		},
 	    mounted(){
+	    		_init_area();
 	    		$('#city').click(function () {
 	    			$('#cover').toggle()
 	    		});
+	    },
+	    methods:{
+	    		logOut(){
+	    			this.deleteCookie('fridayUser');
+	    			if(this.message.reg == '退出'){
+		    			this.message = {
+						log: {title: "登录"},
+						reg: "注册"
+					};
+					router.push('/login');
+					router.go(0);
+	    			}
+	    		},
+	    		setCookie(name, value, days) {
+			    var d = new Date;
+			    d.setTime(d.getTime() + 24*60*60*1000*days);
+			    window.document.cookie = name + "=" + value + ";path=/;expires=" + d.toGMTString();
+			},
+	    		deleteCookie(name) {
+			    this.setCookie(name, '', -1);
+			}
 	    }
 	}
 </script>

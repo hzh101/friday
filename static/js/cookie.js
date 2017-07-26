@@ -18,7 +18,7 @@ function getCookie(name) {
 
 function deleteCookie(name) {
 
-    this.set(name, '', -1);
+    this.setCookie(name, '', -1);
 
 }
-export default {setCookie,getCookie,deleteCookie};
+

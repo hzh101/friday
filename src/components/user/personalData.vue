@@ -74,23 +74,23 @@
 			    return v ? v[2] : null;
 			},
 			submit(){
-				var phone = this.getCookie('firdayUser');
-				if (this.Flag) var sex = '男';
-				else sex = '女';
-				
-				if (this.formData.append) {
-					this.formData.append('phone',phone);
-					this.formData.append('nickname',this.nickname);
-					this.formData.append('sex',sex);
-					this.formData.append('year',this.year);
-					this.formData.append('month',this.month);
-					this.formData.append('day',this.day);
-					this.formData.append('newPhone',this.newPhone);
-				
-					this.$http.post('/api/user/file',this.formData).then(res => {
-						this.headImg = res.bodyText;
-//						router.go(0)
-					});
+				var phone = this.getCookie('fridayUser');
+				if (phone) {
+					if (this.Flag) var sex = '男';
+					else sex = '女';
+					if (this.formData.append) {
+						this.formData.append('phone',phone);
+						this.formData.append('nickname',this.nickname);
+						this.formData.append('sex',sex);
+						this.formData.append('year',this.year);
+						this.formData.append('month',this.month);
+						this.formData.append('day',this.day);
+						this.formData.append('newPhone',this.newPhone);
+					
+						this.$http.post('/api/user/file',this.formData).then(res => {
+							this.headImg = res.bodyText;
+						});
+					}
 				}
 			},
 			creatYear() {
@@ -117,8 +117,8 @@
 			getdata(){
 				var phone = this.getCookie('firdayUser');
 				this.$http.get('/api/user/personMsg',{params:{phone:phone}}).then(res => {
-						this.headImg = res.bodyText;
-//						console.log(this.headImg)
+					this.headImg = res.bodyText;
+//					console.log(this.headImg)
 				});
 			}
 		},

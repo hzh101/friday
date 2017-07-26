@@ -2,11 +2,11 @@
 	<div class="tlw-person-box">
 		<div class="tlw-myAccount">
 			<div class="tlw-myAccount-top">
-				<img src="../../images/17.png" />
-				<p>您好，<span>136****2356</span></p>
+				<img :src="'../../../static/upload/'+msg.headImg" />
+				<p>您好，<span>{{name}}</span></p>
 				<ul class="tlw-present">
-					<li>当前积分<em>124</em></li>
-					<li>我的钱包<em>￥1224.0</em></li>
+					<li>当前积分<em>{{msg.integral}}</em></li>
+					<li>我的钱包<em>￥{{msg.wallet}}</em></li>
 					<li>充值有礼>><em>充值卡兑换>></em></li>
 				</ul>
 			</div>
@@ -23,6 +23,31 @@
 
 <script>
 	export default {
+		data(){
+			return{
+				msg:{headImg:'default.png'},
+				name:'你还没有登录'
+			}
+		},
+		methods:{
+			getCookie(name) {
+			    var v = window.document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+			    return v ? v[2] : null;
+			}
+		},
+		created(){
+			var phone = this.getCookie('fridayUser');
+			if (phone) {
+				this.$http.get('/api/user/myAccount',{params:{phone:phone}}).then((res) => {
+					this.msg = res.data[0];
+					if (this.msg.userName=='nomsg') {
+						this.name = this.msg.phone;
+					}else{
+						this.name = this.msg.userName;
+					}
+				});
+			}
+		}
 	}
 </script>
 <style lang="less" scoped>

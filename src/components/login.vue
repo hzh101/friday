@@ -35,9 +35,9 @@
 						<h4>注册</h4>
 					</div>
 					<div class="tlw-box-inpts">
-						<input class="input1" type="text" placeholder="请输入手机号" />
+						<input v-model="regPhone" class="input1" type="text" placeholder="请输入手机号" />
 						<strong class="phone zh-warn"><em>!</em>请输入手机号</strong>
-						<input class="input2" type="password" placeholder="请输入密码" />
+						<input v-model="regPwd" class="input2" type="password" placeholder="请输入密码" />
 						<strong class="password zh-warn"><em>!</em>请输入密码</strong>
 						<img src="../images/15.png" />
 						<input class="input3" type="text" placeholder="验证码" />
@@ -53,7 +53,7 @@
 						<span>我已阅读并同意《礼拜五用户使用协议》</span>
 					</div>
 					<div class="tlw-box-btn">
-						<button @click="register" class="register-btn2">注册</button>
+						<button @click="reg" class="register-btn2">注册</button>
 						<button @click="login" class="login-btn2">登录</button>
 					</div>
 				</div>
@@ -100,6 +100,8 @@
 		props:["message"],
 		data() {
 			return {
+				regPhone:'',
+				regPwd:'',
 				tanMsg:'用户名或密码不正确!',
 				bool:true,
 				img:'yan5',
@@ -152,6 +154,15 @@
 			register(){
 				$('.tlw-box-zhuce').css('display','block');
 	  			$('.zh-warn').css('opacity',0);
+			},
+			reg(){
+				this.$http.post('/api/user/reg',{phone:this.regPhone,passWord:this.regPwd},{emulateJSON:true}).then(function(res){
+					var result = res.body;
+					if (result.err) {
+//						console.log(result.data)
+						alert("注册成功")
+					}
+				})
 			},
 			submit(){
 				var phone = $(".tlw-box-resetPasswords .input1").val();
@@ -249,8 +260,6 @@
 	  			$('.tlw-box-zhuce').css('display','block');
 	  			$('.zh-warn').css('opacity',0);
 	  		});
-		
-			
 		}
 	}
 	

@@ -4,16 +4,31 @@
 	<head>
 		<meta charset="utf-8">
 		<title>friday</title>
-		<!--<script src="static/js/area.js" type="text/javascript" charset="utf-8"></script>-->
 	</head>
+	<script src="static/js/area.js" type="text/javascript" charset="utf-8"></script>
 
 	<body>
 		<div id="app"></div>
 		<!-- built files will be auto injected -->
 	</body>
 	<script>
-//		import './static/js/area';
-//		_init_area();
+
+
+
+		function setCookie(name, value, days) {
+		    var d = new Date;
+		    d.setTime(d.getTime() + 24*60*60*1000*days);
+		    window.document.cookie = name + "=" + value + ";path=/;expires=" + d.toGMTString();
+		}
+		
+		function getCookie(name) {
+		    var v = window.document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+		    return v ? v[2] : null;
+		}
+		
+		function deleteCookie(name) {
+		    setCookie(name, '', -1);
+		}
 		
 		window._bd_share_config = {
 			"common": {
