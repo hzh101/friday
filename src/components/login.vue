@@ -97,6 +97,7 @@
 	import router from '../router';
 	
 	export default{
+		props:["message"],
 		data() {
 			return {
 				tanMsg:'用户名或密码不正确!',
@@ -122,6 +123,11 @@
 			ranNum(min,max){
 				return Math.floor(Math.random()*(max-min+1)+min);
 			},
+			setCookie(name, value, days) {
+			    var d = new Date;
+			    d.setTime(d.getTime() + 24*60*60*1000*days);
+			    window.document.cookie = name + "=" + value + ";path=/;expires=" + d.toGMTString();
+			},
 			login(){
 				var _this = this;
 				$('.tlw-box-zhuce').css('display','none');
@@ -132,8 +138,11 @@
 					this.$http.post('/api/user/login',{phone:phone,passWord:pwd},{emulateJSON:true}).then(function(res){
 						var data = res.data;
 						if (data==1) {
-							_this.$emit()
-							router.push('/home');
+							_this.setCookie('fridayUser',phone,5);
+							_this.setCookie('fridaypwd',pwd,5);
+							router.push({path:'/home',query:{user:phone}});
+							_this.$emit("logins","{title:'你好,',phone:"+phone+"}");
+							_this.$emit("register","退出");
 						} else{
 							$(".bullet").fadeIn(500).delay(500).fadeOut();
 						}
@@ -143,6 +152,7 @@
 			register(){
 				$('.tlw-box-zhuce').css('display','block');
 	  			$('.zh-warn').css('opacity',0);
+	  			
 			},
 			submit(){
 				var phone = $(".tlw-box-resetPasswords .input1").val();
@@ -322,7 +332,6 @@
 		border: 1px solid #cccccc;
 		text-indent: 8px;
 	}
-	
 	.tlw-register .tlw-register-box .tlw-box .tlw-box-inpts input:nth-of-type(3) {
 		display: block;
 		width: 130px;
