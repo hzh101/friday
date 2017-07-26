@@ -10,8 +10,8 @@
 				</div>
 				<ul class="first-content-right-lyc">
 					<router-link to="/login" tag='li' >
-						<span id="zh-login">{{message.log}}</span>
-						<strong id="zh-phone"></strong>
+						<span id="zh-login">{{message.log.title}}</span>
+						<strong id="zh-phone">{{message.log.phone}}</strong>
 					|</router-link>
 					<li>
 						<span id="zh-reg">{{message.reg}}</span>
@@ -38,10 +38,13 @@
 	export default{
 		props:["message"],
 		components:{ currentCity },
+		methods:{
+			
+		},
 	    mounted(){
 	    		$('#city').click(function () {
 	    			$('#cover').toggle()
-	    		})
+	    		});
 	    }
 	}
 </script>

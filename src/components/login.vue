@@ -123,6 +123,11 @@
 			ranNum(min,max){
 				return Math.floor(Math.random()*(max-min+1)+min);
 			},
+			setCookie(name, value, days) {
+			    var d = new Date;
+			    d.setTime(d.getTime() + 24*60*60*1000*days);
+			    window.document.cookie = name + "=" + value + ";path=/;expires=" + d.toGMTString();
+			},
 			login(){
 				var _this = this;
 				$('.tlw-box-zhuce').css('display','none');
@@ -133,8 +138,10 @@
 					this.$http.post('/api/user/login',{phone:phone,passWord:pwd},{emulateJSON:true}).then(function(res){
 						var data = res.data;
 						if (data==1) {
-							router.push('/home');
-							_this.$emit("logins","您好， "+phone);
+							_this.setCookie('fridayUser',phone,5);
+							_this.setCookie('fridaypwd',pwd,5);
+							router.push({path:'/home',query:{user:phone}});
+							_this.$emit("logins","{title:'你好,',phone:"+phone+"}");
 							_this.$emit("register","退出");
 						} else{
 							$(".bullet").fadeIn(500).delay(500).fadeOut();

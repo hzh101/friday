@@ -13,6 +13,9 @@ var urlencodeParser = bodyParser.urlencoded();
 //var router = devServer.router;
 //var userRouter = devServer.userRouter;
 
+var formidable = require("formidable");
+var fs = require('fs');
+
 var mysql = require("mysql");
 
 var link = mysql.createConnection({
@@ -58,6 +61,51 @@ userRouter.post('/login', urlencodeParser, function(req, res) {
 			}
 		}
 	})
+});
+var num = 0
+userRouter.post('/file',(req,res) => {
+    var form = new formidable.IncomingForm();
+    form.parse(req,function (err,field,files) {
+	    	num++;
+	    	var phone = field.phone;
+    		var imgUrl = phone + '-'+num+'.png';
+    		var nickname = field.nickname;
+    		var sex = field.sex;
+    		var birthday = field.year+"/"+field.month+"/"+field.day;
+    		var newPhone = field.newPhone;
+    		console.log(birthday);
+    		var str = 'headImg="'+imgUrl+'",userName="'+nickname+'",sex="'+sex+'",birthday="'+birthday +'"';
+    		var user = "UPDATE user SET "+str+" WHERE phone="+phone;
+    		var oldImgUrl = phone + '-'+(num-1)+'.png'; 
+        fs.unlink("../static/upload/"+oldImgUrl,function (err) {
+		    if(!err) console.log("删除成功");
+		});
+		//创建可读流
+        var rs = fs.createReadStream(files.file.path);
+        // 创建可写流
+        var ws = fs.createWriteStream("../static/upload/"+imgUrl);
+        rs.pipe(ws);
+        link.query(user, function(err, result) {
+			if(!err) {
+				res.send(imgUrl)
+			}else{
+				console.log(err)
+			}
+		});
+    })
+});
+userRouter.get('/personMsg',(req,res) => {
+	var phone = req.query.phone;
+	var user = 'SELECT headImg FROM user WHERE phone=' + phone;
+	link.query(user, function(err, result) {
+		if(!err) {
+			if(result[0].headImg=='nomsg'){
+				res.send("default.png");
+			}else{
+				res.send(result[0].headImg);
+			}
+		}
+	});
 })
 
 //进入页面的展示数据的接口

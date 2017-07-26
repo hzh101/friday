@@ -5,30 +5,30 @@
 			<div class="tlw-personalData-cont">
 				<div class="tlw-myHeadPortrait">
 					<p>当前头像：</p>
-					<img src="../../images/17.png" />
-					<input type="file"/>
-					<em>修改</em>
+					<img :src="'../../../static/upload/'+headImg" />
+					<input type="file" @change="onFileChange" multiple/>
+					<router-link to='/user/personalData' tag='em'>修改</router-link>
 				</div>
 				<div class="tlw-myNickname">
 					<p>昵称：</p>
-					<input type="text" />
+					<input type="text" v-model="nickname"/>
 				</div>
 				<div class="tlw-myGender">
 					<p>性别：</p>
-					<input id="boy" type="radio" name="person" checked="checked" />
+					<input id="boy" type="radio" name="person" :checked="Flag" @click="Flag=!Flag"/>
 					<label for="boy">男</label>
-					<input id="girl" type="radio" name="person" value="女" />
+					<input id="girl" type="radio" name="person" value="女" :checked="!Flag" @click="Flag=!Flag"/>
 					<label for="girl">女</label>
 				</div>
 				<div class="tlw-myBirthday">
 					<p>生日：</p>
-					<select id="year"></select><span>年</span>
-					<select id="month"></select><span>月</span>
-					<select id="day"></select><span>日</span>
+					<select id="year" v-model="year"></select><span>年</span>
+					<select id="month" v-model="month"></select><span>月</span>
+					<select id="day" v-model="day"></select><span>日</span>
 				</div>
 				<div class="tlw-myPhoneNum">
 					<p>手机：</p>
-					<input type="text"/>
+					<input type="text" v-model="newPhone"/>
 					<span>更换手机</span>
 				</div>
 				<button @click="submit()">确认提交</button>
@@ -38,8 +38,61 @@
 </template>
 
 <script>
+	import router from '../../router';
 	export default {
-		methods: {
+		data(){
+			return{
+				headImg:'default.png',
+				formData:{},
+				nickname:'',
+				year:1949,
+				month:1,
+				day:1,
+				newPhone:"",
+				Flag:true,
+			}
+		},
+		methods:{
+			onFileChange(ev){
+				var phone = this.getCookie('fridayUser');
+				var strChangeArr = ev.target.value.split('.'); 
+				var format = strChangeArr[strChangeArr.length-1].trim();
+				if (format == "jpg" || format == "png" || format == "jpeg") {
+					this.formData = new FormData(); 
+					this.formData.append('file', ev.target.files[0]);
+					this.formData.append('phone',phone);
+					this.$http.post('/api/user/file',this.formData).then(res => {
+						this.headImg = res.bodyText;
+//						console.log(this.headImg)
+					});
+				}else{
+					alert("请上传图片")
+				}
+			},
+			getCookie(name) {
+			    var v = window.document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+			    return v ? v[2] : null;
+			},
+			submit(){
+				var phone = this.getCookie('firdayUser');
+				if (this.Flag) var sex = '男';
+				else sex = '女';
+				
+				if (this.formData.append) {
+					this.formData.append('phone',phone);
+					this.formData.append('nickname',this.nickname);
+					this.formData.append('sex',sex);
+					this.formData.append('year',this.year);
+					this.formData.append('month',this.month);
+					this.formData.append('day',this.day);
+					this.formData.append('newPhone',this.newPhone);
+				
+					this.$http.post('/api/user/file',this.formData).then(res => {
+						this.headImg = res.bodyText;
+//						router.go(0)
+					});
+				}
+			},
 			creatYear() {
 				var year = "";
 				for(var i = 1949; i < 2018; i++) {
@@ -60,12 +113,25 @@
 					day += "<option>" + m + "</option>"
 				}
 				$("#day").html(day);
+			},
+			getdata(){
+				var phone = this.getCookie('firdayUser');
+				this.$http.get('/api/user/personMsg',{params:{phone:phone}}).then(res => {
+						this.headImg = res.bodyText;
+//						console.log(this.headImg)
+				});
 			}
+		},
+		created(){
+			this.getdata()
 		},
 		mounted() {
 			this.creatYear()
 			this.creatMonth()
 			this.creatDay()
+//			this.$http.get('/api/user/file',{params:{id:1}}).then(res => {
+////				console.log(res.data)
+//			})
 		}
 	}
 </script>
