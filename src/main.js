@@ -15,9 +15,11 @@ require("static/js/swiper.min.js");
 Vue.use(VueResource)
 Vue.config.productionTip = false
 
+//console.log(Boolean($('#zh-phone').text()))
+
 new Vue({
   el: '#app',
 	router,
   template: '<App/>',
-  components: { App },
+  components: { App }
 })
