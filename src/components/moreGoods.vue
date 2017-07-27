@@ -79,6 +79,8 @@
 					//flag 标记是加还是减 1 加 0 减
 					this.$http.get('/api/user/addShop',{params:{phone:phone,id:id,flag:1,count:1}}).then(function(res){
 						if (res.bodyText=='1') {
+							var num = $('#shopCarCount').text()-0;
+							$('#shopCarCount').text(++num)
 							alert('添加成功');
 						}
 					});

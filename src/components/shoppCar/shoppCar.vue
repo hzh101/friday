@@ -49,7 +49,9 @@
 			<bullet :tanMsg='tanMsg'></bullet>
 		</div>
 		<div class="carNull" v-show="!flag">
-			<img src="../../../static/imgs/carNull.png"/>
+			<router-link to='/home'>
+				<img src="../../../static/imgs/carNull.png"/>
+			</router-link>
 		</div>
 	</div>
 </template>
@@ -141,6 +143,7 @@
 				this.idArr.forEach((id) => {
 					this.deldata(id);
 				});
+				
 			},
 			delFunc(){
 				this.data.forEach((item,index) => {

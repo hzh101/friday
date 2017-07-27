@@ -89,6 +89,7 @@
 					
 						this.$http.post('/api/user/file',this.formData).then(res => {
 							this.headImg = res.bodyText;
+							alert("资料修改成功!")
 						});
 					}
 				}
@@ -115,11 +116,13 @@
 				$("#day").html(day);
 			},
 			getdata(){
-				var phone = this.getCookie('firdayUser');
-				this.$http.get('/api/user/personMsg',{params:{phone:phone}}).then(res => {
-					this.headImg = res.bodyText;
-//					console.log(this.headImg)
-				});
+				var phone = this.getCookie('fridayUser');
+				if (phone) {
+					this.$http.get('/api/user/personMsg',{params:{phone:phone}}).then(res => {
+						this.headImg = res.bodyText;
+//						console.log(this.headImg)
+					});
+				}
 			}
 		},
 		created(){
@@ -129,9 +132,6 @@
 			this.creatYear()
 			this.creatMonth()
 			this.creatDay()
-//			this.$http.get('/api/user/file',{params:{id:1}}).then(res => {
-////				console.log(res.data)
-//			})
 		}
 	}
 </script>

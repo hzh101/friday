@@ -146,6 +146,7 @@
 
 <script>
 	import breadNav from './breadNav'
+	import router from '../router'
 
 	export default {
 		data(){
@@ -167,6 +168,7 @@
 					//flag 标记是加还是减 1 加 0 减
 					this.$http.get('/api/user/addShop',{params:{phone:phone,id:id,flag:1,count:count}}).then(function(res){
 						if (res.bodyText=='1') {
+							router.go(0)
 							alert('添加成功');
 						}
 					});
